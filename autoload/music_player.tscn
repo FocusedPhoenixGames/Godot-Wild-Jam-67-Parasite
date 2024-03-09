@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4r7mygsc63f3"]
+
+[ext_resource type="Script" path="res://autoload/music_player.gd" id="1_g6u30"]
+[ext_resource type="AudioStream" uid="uid://dsqv7ce6312or" path="res://assets/audio/music/Sad Descent.ogg" id="2_k7iil"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer"]
+bus = &"music"
+script = ExtResource("1_g6u30")
+songs = Array[AudioStream]([ExtResource("2_k7iil")])
