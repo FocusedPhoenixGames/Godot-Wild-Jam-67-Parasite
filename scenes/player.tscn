@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://jqkwdbye3wsr"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_jl034"]
+[ext_resource type="Texture2D" uid="uid://cu4bwysdaxci8" path="res://assets/player/PlaceHolder.png" id="2_7tekw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f0pis"]
+radius = 5.125
+height = 12.75
+
+[node name="player" type="CharacterBody2D"]
+position = Vector2(320, 180)
+script = ExtResource("1_jl034")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_7tekw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(2.5, -0.5)
+scale = Vector2(4, 4)
+shape = SubResource("CapsuleShape2D_f0pis")
