@@ -12,9 +12,8 @@ func _ready():
 
 
 func on_play_pressed():
-	pass
 	# ToDo change scene to 1st level
-	#get_tree().change_scene_to_file()
+	get_tree().change_scene_to_file("res://scenes/game/game.tscn")
 
 
 func on_options_pressed():

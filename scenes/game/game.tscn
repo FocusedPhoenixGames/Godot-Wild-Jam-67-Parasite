@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=3 uid="uid://du68f1qsuhrhq"]
+
+[ext_resource type="Script" path="res://scenes/game/game.gd" id="1_b0jny"]
+[ext_resource type="PackedScene" uid="uid://bd0wkxiatophh" path="res://scenes/player/player.tscn" id="1_fhpq0"]
+[ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="2_358vk"]
+[ext_resource type="Script" path="res://scenes/game/PlayerIndicator.gd" id="3_457dw"]
+
+[sub_resource type="Animation" id="Animation_rsp0n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4c2k1"]
+resource_name = "flash"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6mt72"]
+_data = {
+"RESET": SubResource("Animation_rsp0n"),
+"flash": SubResource("Animation_4c2k1")
+}
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_b0jny")
+startingMap = "test_room.tscn"
+
+[node name="Player" parent="." instance=ExtResource("1_fhpq0")]
+position = Vector2(201, 132)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, 1)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Minimap" parent="UI" instance=ExtResource("2_358vk")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -144.0
+offset_right = 0.0
+grow_horizontal = 0
+
+[node name="PlayerIndicator" type="ColorRect" parent="UI/Minimap"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_457dw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Minimap/PlayerIndicator"]
+libraries = {
+"": SubResource("AnimationLibrary_6mt72")
+}
+autoplay = "flash"
+
+[node name="Background" type="Panel" parent="UI/Minimap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

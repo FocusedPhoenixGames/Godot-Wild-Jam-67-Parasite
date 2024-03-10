@@ -1,0 +1,4 @@
+[2,4,0]
+1,0,0,0||2|test_room.tscn
+[3,4,0]
+0,0,1,0|||scenes/rooms/test_room_2.tscn
