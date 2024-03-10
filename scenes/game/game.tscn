@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://du68f1qsuhrhq"]
+[gd_scene load_steps=10 format=3 uid="uid://du68f1qsuhrhq"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_b0jny"]
 [ext_resource type="PackedScene" uid="uid://bd0wkxiatophh" path="res://scenes/player/player.tscn" id="1_fhpq0"]
 [ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="2_358vk"]
 [ext_resource type="Script" path="res://scenes/game/PlayerIndicator.gd" id="3_457dw"]
+[ext_resource type="Script" path="res://scenes/game/PecentLabel.gd" id="5_bd4ev"]
+[ext_resource type="Script" path="res://scenes/game/MapWindow.gd" id="5_lbbel"]
 
 [sub_resource type="Animation" id="Animation_rsp0n"]
 length = 0.001
@@ -54,15 +56,19 @@ position = Vector2(0, 1)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Minimap" parent="UI" instance=ExtResource("2_358vk")]
-anchors_preset = 1
-anchor_left = 1.0
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 15
 anchor_right = 1.0
-offset_left = -144.0
-offset_right = 0.0
-grow_horizontal = 0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="PlayerIndicator" type="ColorRect" parent="UI/Minimap"]
+[node name="Minimap" parent="UI/MarginContainer" instance=ExtResource("2_358vk")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="PlayerIndicator" type="ColorRect" parent="UI/MarginContainer/Minimap"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -77,16 +83,31 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_457dw")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Minimap/PlayerIndicator"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/MarginContainer/Minimap/PlayerIndicator"]
 libraries = {
 "": SubResource("AnimationLibrary_6mt72")
 }
 autoplay = "flash"
 
-[node name="Background" type="Panel" parent="UI/Minimap"]
+[node name="Background" type="Panel" parent="UI/MarginContainer/Minimap"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MapWindow" type="Panel" parent="UI/MarginContainer"]
+visible = false
+custom_minimum_size = Vector2(336, 192)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("5_lbbel")
+
+[node name="PecentLabel" type="Label" parent="UI/MarginContainer/MapWindow"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "0%"
+script = ExtResource("5_bd4ev")
