@@ -7,6 +7,7 @@ const SAVE_PATH = "user://save_data.sav"
 # MetSys refers to rooms as strings
 @export var startingMap: String
 
+var pauseScreen = preload("res://scenes/menus/pause_screen.tscn")
 var generated_rooms: Array[Vector3i]
 
 
@@ -48,6 +49,12 @@ func _ready() -> void:
 	
 	# Add module for room transitions.
 	add_module("RoomTransitions.gd")
+
+
+func _unhandled_input(event):
+	if event.is_action_pressed("pause"):
+		add_child(pauseScreen.instantiate())
+		get_tree().root.set_input_as_handled()
 
 
 # Returns this node from anywhere.
