@@ -1,4 +1,6 @@
 [2,4,0]
-1,0,0,0||2|test_room.tscn
+1,0,0,0||2|TestRoom.tscn
 [3,4,0]
-0,0,1,0|||scenes/rooms/test_room_2.tscn
+0,0,1,0|||scenes/rooms/TestRoom2.tscn
+[4,4,0]
+0,0,0,0|||scenes/rooms/TestRoom3.tscn

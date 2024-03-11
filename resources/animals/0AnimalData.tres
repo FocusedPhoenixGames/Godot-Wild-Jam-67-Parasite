@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MasterAnimalData" load_steps=2 format=3 uid="uid://cdhgj5uy2aybi"]
+
+[ext_resource type="Script" path="res://resources/animals/0_animal_data.gd" id="1_03h06"]
+
+[resource]
+script = ExtResource("1_03h06")
+type = 0
+health = 0
+power = 0

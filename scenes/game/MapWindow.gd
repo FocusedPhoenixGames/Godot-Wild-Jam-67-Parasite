@@ -1,8 +1,8 @@
 extends Panel
 
+
 # The size of the window in cells.
 var SIZE: Vector2i
-
 # The position where the player started (for the vector feature).
 var startingCoords: Vector2i
 # The offset for drawing the cells. Allows map panning.
@@ -31,8 +31,6 @@ func _draw() -> void:
 	if MetSys.settings.theme.use_shared_borders:
 		MetSys.draw_shared_borders()
 	MetSys.draw_custom_elements(self, Rect2i(-offset.x, -offset.y, SIZE.x, SIZE.y))
-	# Get the current player coordinates.
-	var coords := MetSys.get_current_flat_coords()
 
 
 func _input(event: InputEvent) -> void:
@@ -47,8 +45,6 @@ func _input(event: InputEvent) -> void:
 
 func update_offset():
 	# Update the map offset based on the current position.
-	# Normally the offset is interactive and the player is able to move freely around the map.
-	# But in this demo, the map can overlay the game and thus is updated in real time.
 	offset = -MetSys.get_current_flat_coords() + SIZE / 2
 	playerLocation.offset = Vector2(offset) * MetSys.CELL_SIZE
 
