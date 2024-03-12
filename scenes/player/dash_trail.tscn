@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bh1jmo6ihoppy"]
+
+[ext_resource type="Texture2D" uid="uid://cupg0o8lvh8h5" path="res://icon.svg" id="1_yrao6"]
+[ext_resource type="Script" path="res://scenes/player/dash_trail.gd" id="2_11xb0"]
+
+[node name="DashTrail" type="Sprite2D"]
+z_index = -1
+texture = ExtResource("1_yrao6")
+script = ExtResource("2_11xb0")
