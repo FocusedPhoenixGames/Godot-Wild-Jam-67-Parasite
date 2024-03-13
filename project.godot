@@ -31,6 +31,7 @@ config/icon="res://icon.svg"
 
 MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"
 MusicPlayer="*res://autoload/music_player.tscn"
+GameEvents="*res://autoload/game_events.tscn"
 
 [display]
 

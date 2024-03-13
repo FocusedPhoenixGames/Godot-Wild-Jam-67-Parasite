@@ -7,14 +7,13 @@ func _ready() -> void:
 	body_entered.connect(on_body_entered)
 
 # Player enter save point. Note that in a legit code this should check whether body is really a player.
-func on_body_entered(body: Node2D) -> void:
+func on_body_entered(body: Player) -> void:
 	if Time.get_ticks_msec() - startTime < 1000:
 		return # Small hack to prevent saving at the game start.
 	# Make Game save the data.
 	Game.get_singleton().save_game()
 	# Starting coords for the delta vector feature.
 	Game.get_singleton().reset_map_starting_coords()
-	print("game saved")
 
 
 func _draw() -> void:

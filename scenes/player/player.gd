@@ -1,57 +1,62 @@
 extends CharacterBody2D
+class_name Player
 
-@export var speed = 140.0 * 60 # Physic Updates
-@export var climbSpeed = 80.0
-@export var jumpVelocity = -250.0 -15.625
-@export var jumpBufferTime = 0.1
+enum Ability { WALL_JUMP, CLIMBING, DASH }
+enum State { NORMAL, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE }
 
-@export var wallJumpCooldown = 0.2
+#region Variables
+@export var speed: float = 140.0 * 60 # Physic Updates
+@export var climbSpeed: float = 80.0
+@export var jumpVelocity: float = -250.0 -15.625
+@export var jumpBufferTime: float = 0.1
 
-@export var fallMultiplier = 0.4
-@export var lowJumpMultiplier = 0.5
+@export var wallJumpCooldown: float = 0.2
+
+@export var fallMultiplier: float = 0.4
+@export var lowJumpMultiplier: float = 0.5
 
 # Whether jumping off a wall without climbing pushes the player away from wall
-@export var wallJumpsPushAway = true
+@export var wallJumpsPushAway: bool = true
 
-@onready var sprite = $Sprite2D
-@onready var coyoteTimer = $Timers/CoyoteTimer
-@onready var wallCoyoteTimer = $Timers/WallCoyoteTimer
-@onready var wallJumpTimer = $Timers/WallJumpTimer
-@onready var wallJumpPauseTimer = $Timers/WallJumpPauseTimer
-@onready var wallJumpDeclineTimer = $Timers/WallJumpDeclineTimer
-@onready var ghostTimer = $Timers/DashTrailTimer
-@onready var groundDetector = $GroundDetector
-@onready var wallDetectorRight = $WallDetectors/WallDetectorRight
-@onready var wallDetectorLeft = $WallDetectors/WallDetectorLeft
-@onready var bottomRightCast = $NudgeCasts/BottomRightCast
-@onready var topRightCast = $NudgeCasts/TopRightCast
-@onready var bottomLeftCast = $NudgeCasts/BottomLeftCast
-@onready var topLeftCast = $NudgeCasts/TopLeftCast
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var coyoteTimer: Timer = $Timers/CoyoteTimer
+@onready var wallCoyoteTimer: Timer = $Timers/WallCoyoteTimer
+@onready var wallJumpTimer: Timer = $Timers/WallJumpTimer
+@onready var wallJumpPauseTimer: Timer = $Timers/WallJumpPauseTimer
+@onready var wallJumpDeclineTimer: Timer = $Timers/WallJumpDeclineTimer
+@onready var ghostTimer: Timer = $Timers/DashTrailTimer
+@onready var damageIntervalTimer: Timer = $Timers/DamageIntervalTimer
+@onready var groundDetector: Area2D = $GroundDetector
+@onready var wallDetectorRight: Area2D = $WallDetectors/WallDetectorRight
+@onready var wallDetectorLeft: Area2D = $WallDetectors/WallDetectorLeft
+@onready var bottomRightCast: RayCast2D = $NudgeCasts/BottomRightCast
+@onready var topRightCast: RayCast2D = $NudgeCasts/TopRightCast
+@onready var bottomLeftCast: RayCast2D = $NudgeCasts/BottomLeftCast
+@onready var topLeftCast: RayCast2D = $NudgeCasts/TopLeftCast
+@onready var healthComponent: HealthComponent = $HealthComponent
 
-var jumpBuffered = false
-var jumpStartTime = 0.0
+var jumpBuffered: bool = false
+var jumpStartTime: float = 0.0
 var facingDir = 1
 var wallDir = 0
 var wallJumpDir = 0
 var coyoteWallDir = 0
 
-var dashBuffered = false
-var dashAvailable = false
-var isDashing = false
-var dashStartTime = 0.0
-var dashDir = Vector2.ZERO
-var dashDistance = 5000.0
+var dashBuffered: bool = false
+var dashAvailable: bool = false
+var isDashing: bool = false
+var dashStartTime: float = 0.0
+var dashDir: Vector2 = Vector2.ZERO
+var dashDistance: float = 5000.0
 
-var isTouchingWall = false
-var isGrabbingWall = false
-var isOnFloor = false
-var wasOnFloor = false
-var isOnWall = false
-var wasOnWall = false
-var isAttachedToWall = true
+var isTouchingWall: bool = false
+var isGrabbingWall: bool = false
+var isOnFloor: bool = false
+var wasOnFloor: bool = false
+var isOnWall: bool = false
+var wasOnWall: bool = false
+var isAttachedToWall: bool = true
 
-enum Ability { WALL_JUMP, CLIMBING, DASH }
-enum State { NORMAL, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE }
 var state = State.NORMAL
 var abilities = [Ability.WALL_JUMP, Ability.CLIMBING, Ability.DASH]
 
@@ -59,11 +64,14 @@ var ghost_scene = preload("res://scenes/player/dash_trail.tscn")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var resetPosition: Vector2
+#endregion
 
 func _ready():
 	wallJumpPauseTimer.timeout.connect(active_wall_jump_decline)
 	wallJumpDeclineTimer.timeout.connect(switch_to_normal_state)
 	ghostTimer.timeout.connect(on_ghost_timer_timeout)
+	damageIntervalTimer.timeout.connect(on_damage_interval_timer_timeout)
+	healthComponent.health_changed.connect(on_health_changed)
 
 func _physics_process(delta):
 	state = get_updated_state()
@@ -74,6 +82,7 @@ func _physics_process(delta):
 		State.CLIMBING:
 			climbing_state(delta)
 
+#region States and Abilities
 func is_near_wall() -> bool:
 	if facingDir == 1:
 		if wallDetectorRight.has_overlapping_bodies():
@@ -264,6 +273,7 @@ func handle_wall_jump():
 
 func reset_jump_buffer():
 	jumpBuffered = false
+#endregion
 
 func update_sprite():
 	if facingDir == 1:
@@ -349,3 +359,16 @@ func on_enter():
 
 func _on_spike_entered(body):
 	print("Spike kill player")
+
+#region Damage
+func on_health_changed() -> void:
+	# player takes no damage if damageIntervalTimer is running
+	if !damageIntervalTimer.is_stopped():
+		return
+	
+	print(healthComponent.currentHealth)
+	damageIntervalTimer.start()
+
+func on_damage_interval_timer_timeout() -> void:
+	on_health_changed()
+#endregion

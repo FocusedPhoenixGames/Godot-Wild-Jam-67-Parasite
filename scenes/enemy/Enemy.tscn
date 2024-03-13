@@ -1,16 +1,32 @@
-[gd_scene load_steps=6 format=3 uid="uid://btglmx5p233s4"]
+[gd_scene load_steps=8 format=3 uid="uid://btglmx5p233s4"]
 
 [ext_resource type="Texture2D" uid="uid://cupg0o8lvh8h5" path="res://icon.svg" id="1_6pm1k"]
-[ext_resource type="Script" path="res://scripts/EnemyHealth.gd" id="1_il4hb"]
-[ext_resource type="Script" path="res://scenes/enemy/Enemy.gd" id="1_op2v8"]
+[ext_resource type="PackedScene" uid="uid://dqe7p8u5luxl1" path="res://components/hitbox_component.tscn" id="4_lls5g"]
+[ext_resource type="PackedScene" uid="uid://cb5o5n2xsmvkh" path="res://components/health_component.tscn" id="5_2m20l"]
+[ext_resource type="PackedScene" uid="uid://vp0aej2eo7yy" path="res://components/hurtbox_component.tscn" id="6_ehdxr"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cweic"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uq2dd"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmm5x"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ckb3x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_amq1j"]
 
 [node name="Enemy" type="CharacterBody2D"]
-collision_mask = 8
-script = ExtResource("1_op2v8")
+collision_layer = 8
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_2m20l")]
+
+[node name="HitboxComponent" parent="." instance=ExtResource("4_lls5g")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_uq2dd")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("6_ehdxr")]
+healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_ckb3x")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1.90735e-06, -1.90735e-06)
@@ -18,19 +34,4 @@ scale = Vector2(0.15625, 0.15625)
 texture = ExtResource("1_6pm1k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_cweic")
-
-[node name="EnemyHealth" type="Node" parent="."]
-script = ExtResource("1_il4hb")
-
-[node name="AttackArea" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-shape = SubResource("RectangleShape2D_qmm5x")
-debug_color = Color(1, 0.258824, 0.317647, 0.419608)
-
-[node name="AttackCheckTimer" type="Timer" parent="."]
-wait_time = 0.1
-
-[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+shape = SubResource("RectangleShape2D_amq1j")

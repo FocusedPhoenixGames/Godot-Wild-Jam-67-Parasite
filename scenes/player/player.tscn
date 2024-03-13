@@ -1,11 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://bd0wkxiatophh"]
+[gd_scene load_steps=12 format=3 uid="uid://bd0wkxiatophh"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_222uv"]
 [ext_resource type="Texture2D" uid="uid://dy3x7uf1388do" path="res://scenes/player/player_temp.png" id="2_8f45w"]
 [ext_resource type="Script" path="res://scripts/PlayerHealth.gd" id="3_ix52x"]
+[ext_resource type="PackedScene" uid="uid://cb5o5n2xsmvkh" path="res://components/health_component.tscn" id="4_0mhdc"]
+[ext_resource type="PackedScene" uid="uid://vp0aej2eo7yy" path="res://components/hurtbox_component.tscn" id="5_hp0i7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kijyj"]
-size = Vector2(10, 21)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0h3gv"]
+radius = 16.0
+height = 34.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m26t1"]
 size = Vector2(10, 2.5)
@@ -19,19 +22,28 @@ size = Vector2(3, 19)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x6tip"]
 size = Vector2(3, 19)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubgli"]
+size = Vector2(8, 11.25)
+
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 2
+collision_mask = 10
 script = ExtResource("1_222uv")
+
+[node name="PlayerHealth" type="Node" parent="."]
+script = ExtResource("3_ix52x")
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_0mhdc")]
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("5_hp0i7")]
+healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CapsuleShape2D_0h3gv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -2)
 scale = Vector2(0.026, 0.026)
 texture = ExtResource("2_8f45w")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_kijyj")
 
 [node name="GroundDetector" type="Area2D" parent="."]
 visible = false
@@ -127,8 +139,11 @@ one_shot = true
 [node name="DashTrailTimer" type="Timer" parent="Timers"]
 wait_time = 0.05
 
-[node name="PlayerHealth" type="Node" parent="."]
-script = ExtResource("3_ix52x")
+[node name="DamageIntervalTimer" type="Timer" parent="Timers"]
 
-[connection signal="body_entered" from="Hitbox" to="." method="_on_spike_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5.625)
+shape = SubResource("RectangleShape2D_ubgli")
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_spike_entered"]
