@@ -9,9 +9,8 @@ func _ready():
 	attackCheckTimer.timeout.connect(check_for_player)
 
 func check_for_player():
-	if attackArea.has_overlapping_bodies():
-		for body in attackArea.get_overlapping_bodies():
-			_on_attack_area_body_entered(body)
+	for body in attackArea.get_overlapping_bodies():
+		_on_attack_area_body_entered(body)
 
 func _on_attack_area_body_entered(body):
 	var health = body.get_node_or_null("PlayerHealth")

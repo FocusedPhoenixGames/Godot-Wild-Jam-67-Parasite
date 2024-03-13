@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bd0wkxiatophh"]
+[gd_scene load_steps=10 format=3 uid="uid://bd0wkxiatophh"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_222uv"]
 [ext_resource type="Texture2D" uid="uid://dy3x7uf1388do" path="res://scenes/player/player_temp.png" id="2_8f45w"]
 [ext_resource type="Script" path="res://scripts/PlayerHealth.gd" id="3_ix52x"]
+[ext_resource type="PackedScene" uid="uid://bprs0v5f55n37" path="res://scenes/player/weapons/test_weapon.tscn" id="4_dx825"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kijyj"]
 size = Vector2(10, 21)
@@ -129,6 +130,8 @@ wait_time = 0.05
 
 [node name="PlayerHealth" type="Node" parent="."]
 script = ExtResource("3_ix52x")
+
+[node name="TestWeapon" parent="." instance=ExtResource("4_dx825")]
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_spike_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

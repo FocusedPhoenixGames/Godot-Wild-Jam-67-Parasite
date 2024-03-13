@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bprs0v5f55n37"]
+
+[ext_resource type="PackedScene" uid="uid://ctgphu5olwbkb" path="res://scenes/player/weapons/weapon.tscn" id="1_d5d3g"]
+[ext_resource type="Script" path="res://scenes/player/weapons/test_weapon.gd" id="2_3ee1x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_erf6o"]
+resource_local_to_scene = true
+radius = 26.0192
+
+[node name="TestWeapon" type="Node"]
+
+[node name="Weapon" parent="." instance=ExtResource("1_d5d3g")]
+monitorable = false
+script = ExtResource("2_3ee1x")
+
+[node name="CollisionShape2D" parent="Weapon" index="0"]
+shape = SubResource("CircleShape2D_erf6o")
+
+[node name="AttackDelay" type="Timer" parent="Weapon"]
+one_shot = true
+
+[node name="AttackDuration" type="Timer" parent="Weapon"]
+
+[editable path="Weapon"]
