@@ -346,3 +346,6 @@ func attach_to_wall():
 func on_enter():
 	# Position for kill system. Assigned when entering new room (see Game.gd).
 	resetPosition = position
+
+func _on_spike_entered(body):
+	print("Spike kill player")

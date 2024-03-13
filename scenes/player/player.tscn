@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bd0wkxiatophh"]
+[gd_scene load_steps=9 format=3 uid="uid://bd0wkxiatophh"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_222uv"]
 [ext_resource type="Texture2D" uid="uid://dy3x7uf1388do" path="res://scenes/player/player_temp.png" id="2_8f45w"]
+[ext_resource type="Script" path="res://scripts/PlayerHealth.gd" id="3_ix52x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kijyj"]
 size = Vector2(10, 21)
@@ -125,3 +126,9 @@ one_shot = true
 
 [node name="DashTrailTimer" type="Timer" parent="Timers"]
 wait_time = 0.05
+
+[node name="PlayerHealth" type="Node" parent="."]
+script = ExtResource("3_ix52x")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_spike_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
