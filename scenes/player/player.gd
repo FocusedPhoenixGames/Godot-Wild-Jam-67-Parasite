@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-enum Ability { WALL_JUMP, CLIMBING, DASH }
+const Ability = preload("res://scripts/ability_constants.gd").Ability
 enum State { NORMAL, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE }
 
 #region Variables
@@ -37,6 +37,7 @@ enum State { NORMAL, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE }
 @onready var topLeftCast: RayCast2D = $NudgeCasts/TopLeftCast
 @onready var healthComponent: HealthComponent = $HealthComponent
 @onready var hitboxComponent: HitboxComponent = $HitboxComponent
+@onready var parasiteComponent: ParasiteComponent = $ParasiteComponent
 
 var jumpBuffered: bool = false
 var jumpStartTime: float = 0.0
@@ -62,7 +63,7 @@ var wasOnWall: bool = false
 var isAttachedToWall: bool = true
 
 var state = State.NORMAL
-var abilities = [Ability.WALL_JUMP, Ability.CLIMBING, Ability.DASH]
+var abilities = []
 
 var ghost_scene = preload("res://scenes/player/dash_trail.tscn")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -77,6 +78,7 @@ func _ready():
 	damageIntervalTimer.timeout.connect(on_damage_interval_timer_timeout)
 	healthComponent.health_changed.connect(on_health_changed)
 	attackTimer.timeout.connect(reset_attack)
+	parasiteComponent.abilities_changed.connect(update_abilities)
 
 func _physics_process(delta):
 	state = get_updated_state()
@@ -395,3 +397,6 @@ func reset_attack_shape():
 
 func reset_attack():
 	attackAvailable = true
+
+func update_abilities():
+	abilities = parasiteComponent.abilities

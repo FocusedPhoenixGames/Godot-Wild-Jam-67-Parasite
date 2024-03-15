@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bd0wkxiatophh"]
+[gd_scene load_steps=15 format=3 uid="uid://bd0wkxiatophh"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_222uv"]
 [ext_resource type="Texture2D" uid="uid://dy3x7uf1388do" path="res://scenes/player/player_temp.png" id="2_8f45w"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cb5o5n2xsmvkh" path="res://components/health_component.tscn" id="4_0mhdc"]
 [ext_resource type="PackedScene" uid="uid://vp0aej2eo7yy" path="res://components/hurtbox_component.tscn" id="5_hp0i7"]
 [ext_resource type="PackedScene" uid="uid://dqe7p8u5luxl1" path="res://components/hitbox_component.tscn" id="6_ch317"]
+[ext_resource type="PackedScene" uid="uid://ddy3n2drispss" path="res://scenes/player/parasite_component.tscn" id="7_psfo0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m26t1"]
 size = Vector2(10, 2.5)
@@ -164,5 +165,7 @@ sprite = NodePath("../Sprite2D")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("RectangleShape2D_63lwt")
 
-[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[node name="ParasiteComponent" parent="." instance=ExtResource("7_psfo0")]
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_spike_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

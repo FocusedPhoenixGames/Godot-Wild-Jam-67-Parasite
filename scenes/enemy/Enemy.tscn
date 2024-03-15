@@ -42,3 +42,5 @@ shape = SubResource("RectangleShape2D_amq1j")
 
 [node name="InfectableComponent" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("5_m6ypm")]
 enemy = NodePath("..")
+healthPercentage = 33.4
+abilities = Array[int]([2])

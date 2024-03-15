@@ -1,14 +1,18 @@
 extends Node
 class_name InfectableComponent
 
+const Ability = preload("res://scripts/ability_constants.gd").Ability
+
 @export var enemy: Node
 @export var healthPercentage = 33.4
+@export var abilities: Array[Ability]
 
 @onready var button: Button = $Button
 @onready var outlineMaterialRes: ShaderMaterial = preload("res://assets/shaders/outline.tres")
 
 var healthComponent: HealthComponent
 var interactSprite: Sprite2D
+var player
 
 var hovered = false
 
@@ -24,13 +28,17 @@ func _ready():
 	
 	button.mouse_entered.connect(on_enter_hover)
 	button.mouse_exited.connect(on_exit_hover)
+	
+	player = get_tree().root.get_node("Game").get_node("Player")
 
 func _process(delta):
 	if not hovered:
 		return
 	
 	if Input.is_action_just_pressed("interact"):
-		print("take control")
+		var parasiteComponent = player.get_node("ParasiteComponent")
+		parasiteComponent.infect(self)
+		enemy.queue_free()
 
 func on_health_changed():
 	var currentPercent = healthComponent.currentHealth as float / healthComponent.maxHealth
