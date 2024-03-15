@@ -38,6 +38,11 @@ enum State { NORMAL, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE }
 @onready var healthComponent: HealthComponent = $HealthComponent
 @onready var hitboxComponent: HitboxComponent = $HitboxComponent
 @onready var hurtboxComponent: HurtboxComponent = $HurtboxComponent
+<<<<<<< Updated upstream
+=======
+@onready var parasiteComponent: ParasiteComponent = $ParasiteComponent
+@onready var animation: AnimationPlayer = $AnimationPlayer
+>>>>>>> Stashed changes
 
 var jumpBuffered: bool = false
 var jumpStartTime: float = 0.0
@@ -101,16 +106,16 @@ func is_near_wall() -> bool:
 	wallDir = 0
 	return false
 
-func get_updated_state() -> State:
+func get_updated_state() -> playerState:
 	isOnWall = is_near_wall()
 	
-	if state == State.WALL_JUMPING || state == State.WALL_JUMP_DECLINE:
+	if state == playerState.WALL_JUMPING || state == playerState.WALL_JUMP_DECLINE:
 		return state
 	
 	if abilities.has(Ability.CLIMBING):
 		if isOnWall and Input.is_action_pressed("climb"):
-			return State.CLIMBING
-	return State.NORMAL
+			return playerState.CLIMBING
+	return playerState.NORMAL
 
 func normal_state(delta):
 	apply_gravity(delta)

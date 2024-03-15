@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsfjcd5fxy2n4"]
+
+[ext_resource type="PackedScene" uid="uid://dhf64adcuj826" path="res://scenes/enemy/character_body_2d.tscn" id="2_u3wke"]
+[ext_resource type="PackedScene" uid="uid://b708r2po0ebrm" path="res://scenes/enemy/cheetah.tscn" id="3_lecxf"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lnkhn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7w5dg"]
+size = Vector2(30, 20)
+
+[node name="test-fsm" type="Node2D"]
+
+[node name="Cheetah" parent="." instance=ExtResource("3_lecxf")]
+position = Vector2(347, 168)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(237, 240)
+scale = Vector2(14.1442, 2.69534)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(1.43051e-06, 0.999999)
+scale = Vector2(30, 20)
+texture = SubResource("PlaceholderTexture2D_lnkhn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_7w5dg")
+
+[node name="player" parent="." instance=ExtResource("2_u3wke")]
+position = Vector2(124, 173)
