@@ -1,30 +1,18 @@
-[gd_scene load_steps=14 format=3 uid="uid://dwse7tfiateik"]
+[gd_scene load_steps=20 format=3 uid="uid://dwse7tfiateik"]
 
+[ext_resource type="Script" path="res://scenes/enemy/cheetah.gd" id="1_835cq"]
 [ext_resource type="PackedScene" uid="uid://cb5o5n2xsmvkh" path="res://components/health_component.tscn" id="1_lbchf"]
 [ext_resource type="PackedScene" uid="uid://dqe7p8u5luxl1" path="res://components/hitbox_component.tscn" id="2_k6jra"]
 [ext_resource type="PackedScene" uid="uid://vp0aej2eo7yy" path="res://components/hurtbox_component.tscn" id="3_kevrj"]
 [ext_resource type="Texture2D" uid="uid://d2f5777ret32p" path="res://scenes/enemy/cheetah.png" id="4_s17h5"]
+[ext_resource type="Script" path="res://scripts/StateMachine/FiniteStateMachine.gd" id="5_bgekf"]
+[ext_resource type="Script" path="res://scenes/enemy/Idle.gd" id="6_j4wn3"]
+[ext_resource type="Script" path="res://scenes/enemy/Chase.gd" id="7_g6w18"]
+[ext_resource type="Script" path="res://scenes/enemy/Attack.gd" id="8_7pu1y"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cogbr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lgpx0"]
-
-[sub_resource type="Animation" id="Animation_ggms0"]
-resource_name = "idle"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_u6ok2"]
 length = 0.001
@@ -39,40 +27,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2i(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_47r3u"]
-resource_name = "walk"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_y7hkt"]
-resource_name = "jump"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2)]
 }
 
 [sub_resource type="Animation" id="Animation_u5kqd"]
@@ -92,6 +46,57 @@ tracks/0/keys = {
 "values": [Vector2i(0, 3), Vector2i(1, 3), Vector2i(2, 3), Vector2i(3, 3)]
 }
 
+[sub_resource type="Animation" id="Animation_ggms0"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_y7hkt"]
+resource_name = "jump"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_47r3u"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i0x7b"]
 _data = {
 "RESET": SubResource("Animation_u6ok2"),
@@ -104,13 +109,16 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yr38f"]
 size = Vector2(18, 16)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_vau4x"]
+radius = 43.0116
+
 [node name="Cheetah" type="CharacterBody2D"]
-collision_layer = 8
-collision_mask = 9
+script = ExtResource("1_835cq")
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_lbchf")]
 
 [node name="HitboxComponent" parent="." instance=ExtResource("2_k6jra")]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(-13, -4)
@@ -118,6 +126,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_cogbr")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent", "myHitboxComponent") instance=ExtResource("3_kevrj")]
+visible = false
 healthComponent = NodePath("../HealthComponent")
 myHitboxComponent = NodePath("../HitboxComponent")
 
@@ -135,7 +144,32 @@ vframes = 4
 libraries = {
 "": SubResource("AnimationLibrary_i0x7b")
 }
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(4, 8)
 shape = SubResource("RectangleShape2D_yr38f")
+
+[node name="FiniteStateMachine" type="Node2D" parent="."]
+script = ExtResource("5_bgekf")
+
+[node name="Idle" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("6_j4wn3")
+
+[node name="Chase" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("7_g6w18")
+
+[node name="Attack" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("8_7pu1y")
+
+[node name="debug" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="PlayerDetection" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+shape = SubResource("CircleShape2D_vau4x")
+
+[connection signal="body_entered" from="PlayerDetection" to="FiniteStateMachine/Idle" method="_on_player_detection_body_entered"]
