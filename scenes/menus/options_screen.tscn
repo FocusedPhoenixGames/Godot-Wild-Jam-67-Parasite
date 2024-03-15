@@ -1,16 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://bs3llscoi3opq"]
+[gd_scene load_steps=4 format=3 uid="uid://bs3llscoi3opq"]
 
 [ext_resource type="Script" path="res://scenes/menus/options_screen.gd" id="1_jx6sf"]
 [ext_resource type="PackedScene" uid="uid://c4sjs0ci6ebcp" path="res://scenes/menus/sound_button.tscn" id="1_ydds3"]
+[ext_resource type="Theme" uid="uid://bvabb4lgyanfc" path="res://resources/themes/theme.tres" id="2_4v4un"]
 
 [node name="OptionsScreen" type="CanvasLayer"]
 layer = 2
 script = ExtResource("1_jx6sf")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -108.0
+offset_top = -146.5
+offset_right = 108.0
+offset_bottom = 146.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -18,6 +25,10 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="Panel" type="Panel" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("2_4v4un")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
 layout_mode = 2
@@ -33,6 +44,7 @@ size_flags_vertical = 4
 
 [node name="OptionsLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/OptionsContainer"]
 layout_mode = 2
+theme = ExtResource("2_4v4un")
 text = "Options"
 horizontal_alignment = 1
 
@@ -45,6 +57,7 @@ layout_mode = 2
 
 [node name="MasterLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/OptionsContainer/VBoxContainer/MasterContainer"]
 layout_mode = 2
+theme = ExtResource("2_4v4un")
 text = "Master Volume"
 
 [node name="MasterSlider" type="HSlider" parent="MarginContainer/PanelContainer/MarginContainer/OptionsContainer/VBoxContainer/MasterContainer"]
@@ -54,6 +67,7 @@ focus_neighbor_top = NodePath("../../../BackButton")
 focus_neighbor_bottom = NodePath("../../SfxContainer/SfxSlider")
 focus_next = NodePath("../../SfxContainer/SfxSlider")
 focus_previous = NodePath("../../../BackButton")
+theme = ExtResource("2_4v4un")
 max_value = 1.0
 step = 0.01
 
@@ -62,6 +76,7 @@ layout_mode = 2
 
 [node name="SfxLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/OptionsContainer/VBoxContainer/SfxContainer"]
 layout_mode = 2
+theme = ExtResource("2_4v4un")
 text = "SFX Volume"
 
 [node name="SfxSlider" type="HSlider" parent="MarginContainer/PanelContainer/MarginContainer/OptionsContainer/VBoxContainer/SfxContainer"]
@@ -71,6 +86,7 @@ focus_neighbor_top = NodePath("../../MasterContainer/MasterSlider")
 focus_neighbor_bottom = NodePath("../../MusicContainer/MusicSlider")
 focus_next = NodePath("../../MusicContainer/MusicSlider")
 focus_previous = NodePath("../../MasterContainer/MasterSlider")
+theme = ExtResource("2_4v4un")
 max_value = 1.0
 step = 0.01
 
@@ -79,6 +95,7 @@ layout_mode = 2
 
 [node name="MusicLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/OptionsContainer/VBoxContainer/MusicContainer"]
 layout_mode = 2
+theme = ExtResource("2_4v4un")
 text = "Music Volume"
 
 [node name="MusicSlider" type="HSlider" parent="MarginContainer/PanelContainer/MarginContainer/OptionsContainer/VBoxContainer/MusicContainer"]
@@ -88,6 +105,7 @@ focus_neighbor_top = NodePath("../../SfxContainer/SfxSlider")
 focus_neighbor_bottom = NodePath("../../WindowContainer/WindowButton")
 focus_next = NodePath("../../WindowContainer/WindowButton")
 focus_previous = NodePath("../../SfxContainer/SfxSlider")
+theme = ExtResource("2_4v4un")
 max_value = 1.0
 step = 0.01
 
@@ -96,16 +114,18 @@ layout_mode = 2
 
 [node name="WindowLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/OptionsContainer/VBoxContainer/WindowContainer"]
 layout_mode = 2
+theme = ExtResource("2_4v4un")
 text = "Windowed Mode"
 
 [node name="WindowButton" parent="MarginContainer/PanelContainer/MarginContainer/OptionsContainer/VBoxContainer/WindowContainer" instance=ExtResource("1_ydds3")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 0
 focus_neighbor_top = NodePath("../../MusicContainer/MusicSlider")
 focus_neighbor_bottom = NodePath("../../../BackButton")
 focus_next = NodePath("../../../BackButton")
 focus_previous = NodePath("../../MusicContainer/MusicSlider")
+theme = ExtResource("2_4v4un")
+theme_override_font_sizes/font_size = 20
 text = "Windowed"
 
 [node name="BackButton" parent="MarginContainer/PanelContainer/MarginContainer/OptionsContainer" instance=ExtResource("1_ydds3")]
@@ -115,4 +135,6 @@ focus_neighbor_top = NodePath("../VBoxContainer/WindowContainer/WindowButton")
 focus_neighbor_bottom = NodePath("../VBoxContainer/MasterContainer/MasterSlider")
 focus_next = NodePath("../VBoxContainer/MasterContainer/MasterSlider")
 focus_previous = NodePath("../VBoxContainer/WindowContainer/WindowButton")
+theme = ExtResource("2_4v4un")
+theme_override_font_sizes/font_size = 20
 text = "Back"

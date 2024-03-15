@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_222uv"]
 [ext_resource type="Script" path="res://scripts/PlayerHealth.gd" id="3_ix52x"]
 [ext_resource type="PackedScene" uid="uid://cb5o5n2xsmvkh" path="res://components/health_component.tscn" id="4_0mhdc"]
-[ext_resource type="Texture2D" path="res://scenes/player/shroom_guy_animations.png" id="4_w5ppk"]
+[ext_resource type="Texture2D" uid="uid://bqre445q2635q" path="res://scenes/player/shroom_guy_animations.png" id="4_w5ppk"]
 [ext_resource type="PackedScene" uid="uid://vp0aej2eo7yy" path="res://components/hurtbox_component.tscn" id="5_hp0i7"]
 [ext_resource type="PackedScene" uid="uid://dqe7p8u5luxl1" path="res://components/hitbox_component.tscn" id="6_ch317"]
 [ext_resource type="PackedScene" path="res://scenes/player/parasite_component.tscn" id="7_psfo0"]

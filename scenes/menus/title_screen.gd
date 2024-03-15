@@ -4,7 +4,7 @@ var optionsScene = preload("res://scenes/menus/options_screen.tscn")
 
 
 func _ready():
-	MusicPlayer.play_music(0)
+	MusicPlayer.play_music(1)
 	$%PlayButton.pressed.connect(on_play_pressed)
 	$%OptionsButton.pressed.connect(on_options_pressed)
 	$%QuitButton.pressed.connect(on_quit_pressed)
