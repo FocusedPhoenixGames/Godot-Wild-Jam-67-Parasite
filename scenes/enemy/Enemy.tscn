@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://vp0aej2eo7yy" path="res://components/hurtbox_component.tscn" id="6_ehdxr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uq2dd"]
+size = Vector2(12, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ckb3x"]
 
@@ -22,8 +23,9 @@ collision_layer = 8
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_uq2dd")
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("6_ehdxr")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent", "myHitboxComponent") instance=ExtResource("6_ehdxr")]
 healthComponent = NodePath("../HealthComponent")
+myHitboxComponent = NodePath("../HitboxComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("RectangleShape2D_ckb3x")

@@ -11,6 +11,7 @@ enum State { NORMAL, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE }
 @export var jumpBufferTime: float = 0.1
 
 @export var wallJumpCooldown: float = 0.2
+@export var attackCooldown: float = 0.2
 
 @export var fallMultiplier: float = 0.4
 @export var lowJumpMultiplier: float = 0.5
@@ -26,6 +27,7 @@ enum State { NORMAL, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE }
 @onready var wallJumpDeclineTimer: Timer = $Timers/WallJumpDeclineTimer
 @onready var ghostTimer: Timer = $Timers/DashTrailTimer
 @onready var damageIntervalTimer: Timer = $Timers/DamageIntervalTimer
+@onready var attackTimer: Timer = $Timers/AttackTimer
 @onready var groundDetector: Area2D = $GroundDetector
 @onready var wallDetectorRight: Area2D = $WallDetectors/WallDetectorRight
 @onready var wallDetectorLeft: Area2D = $WallDetectors/WallDetectorLeft
@@ -34,6 +36,7 @@ enum State { NORMAL, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE }
 @onready var bottomLeftCast: RayCast2D = $NudgeCasts/BottomLeftCast
 @onready var topLeftCast: RayCast2D = $NudgeCasts/TopLeftCast
 @onready var healthComponent: HealthComponent = $HealthComponent
+@onready var hitboxComponent: HitboxComponent = $HitboxComponent
 
 var jumpBuffered: bool = false
 var jumpStartTime: float = 0.0
@@ -48,6 +51,7 @@ var isDashing: bool = false
 var dashStartTime: float = 0.0
 var dashDir: Vector2 = Vector2.ZERO
 var dashDistance: float = 5000.0
+var attackAvailable: bool = true
 
 var isTouchingWall: bool = false
 var isGrabbingWall: bool = false
@@ -72,6 +76,7 @@ func _ready():
 	ghostTimer.timeout.connect(on_ghost_timer_timeout)
 	damageIntervalTimer.timeout.connect(on_damage_interval_timer_timeout)
 	healthComponent.health_changed.connect(on_health_changed)
+	attackTimer.timeout.connect(reset_attack)
 
 func _physics_process(delta):
 	state = get_updated_state()
@@ -111,6 +116,7 @@ func normal_state(delta):
 	isOnFloor = is_on_floor() || groundDetector.has_overlapping_bodies()
 	wasOnFloor = isOnFloor
 	wasOnWall = isOnWall
+	handle_attack()
 	handle_buffers()
 	handle_jump(delta)
 	handle_movement(delta)
@@ -372,3 +378,20 @@ func on_health_changed() -> void:
 func on_damage_interval_timer_timeout() -> void:
 	on_health_changed()
 #endregion
+
+func handle_attack():
+	if Input.is_action_just_pressed("left_click"):
+		if attackAvailable:
+			var shape = hitboxComponent.get_node("CollisionShape2D")
+			shape.global_position.x = global_position.x + ((shape.shape.size.x / 2) * facingDir)
+			shape.disabled = false
+			attackAvailable = false
+			get_tree().create_timer(0.1).timeout.connect(reset_attack_shape)
+			attackTimer.start()
+
+func reset_attack_shape():
+	var shape = hitboxComponent.get_node("CollisionShape2D")
+	shape.disabled = true
+
+func reset_attack():
+	attackAvailable = true
