@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bd0wkxiatophh"]
+[gd_scene load_steps=14 format=3 uid="uid://bd0wkxiatophh"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_222uv"]
 [ext_resource type="Texture2D" uid="uid://dy3x7uf1388do" path="res://scenes/player/player_temp.png" id="2_8f45w"]
 [ext_resource type="Script" path="res://scripts/PlayerHealth.gd" id="3_ix52x"]
 [ext_resource type="PackedScene" uid="uid://cb5o5n2xsmvkh" path="res://components/health_component.tscn" id="4_0mhdc"]
-[ext_resource type="Material" uid="uid://83727x6flun0" path="res://assets/shaders/damage_flash_material.tres" id="4_rwiqh"]
 [ext_resource type="PackedScene" uid="uid://vp0aej2eo7yy" path="res://components/hurtbox_component.tscn" id="5_hp0i7"]
 [ext_resource type="PackedScene" uid="uid://dqe7p8u5luxl1" path="res://components/hitbox_component.tscn" id="6_ch317"]
 
@@ -39,7 +38,6 @@ script = ExtResource("3_ix52x")
 [node name="HealthComponent" parent="." instance=ExtResource("4_0mhdc")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = ExtResource("4_rwiqh")
 position = Vector2(0, -2)
 scale = Vector2(0.026, 0.026)
 texture = ExtResource("2_8f45w")

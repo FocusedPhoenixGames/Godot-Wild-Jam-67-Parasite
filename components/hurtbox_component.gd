@@ -5,12 +5,14 @@ class_name HurtboxComponent
 @export var myHitboxComponent: HitboxComponent
 @export var sprite: Sprite2D
 
+@onready var whiteMaterialRes: ShaderMaterial = preload("res://assets/shaders/damage_flash_material.tres")
 var whitenMaterial: ShaderMaterial
 var shaderTween: Tween
 
 func _ready():
 	area_entered.connect(on_area_entered)
-	if sprite.material is ShaderMaterial:
+	if sprite != null:
+		sprite.material = whiteMaterialRes.duplicate()
 		whitenMaterial = sprite.material as ShaderMaterial
 
 func on_area_entered(otherArea: Area2D):

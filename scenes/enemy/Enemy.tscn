@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://btglmx5p233s4"]
+[gd_scene load_steps=8 format=3 uid="uid://btglmx5p233s4"]
 
 [ext_resource type="Texture2D" uid="uid://cupg0o8lvh8h5" path="res://icon.svg" id="1_6pm1k"]
 [ext_resource type="PackedScene" uid="uid://dqe7p8u5luxl1" path="res://components/hitbox_component.tscn" id="4_lls5g"]
-[ext_resource type="Material" uid="uid://83727x6flun0" path="res://assets/shaders/damage_flash_material.tres" id="4_rttwv"]
 [ext_resource type="PackedScene" uid="uid://cb5o5n2xsmvkh" path="res://components/health_component.tscn" id="5_2m20l"]
 [ext_resource type="PackedScene" uid="uid://vp0aej2eo7yy" path="res://components/hurtbox_component.tscn" id="6_ehdxr"]
 
@@ -33,7 +32,6 @@ sprite = NodePath("../Sprite2D")
 shape = SubResource("RectangleShape2D_ckb3x")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = ExtResource("4_rttwv")
 position = Vector2(1.90735e-06, -1.90735e-06)
 scale = Vector2(0.15625, 0.15625)
 texture = ExtResource("1_6pm1k")
