@@ -189,31 +189,35 @@ texture_scale = 2.0
 
 [node name="PointLight2D2" type="PointLight2D" parent="Lights"]
 color = Color(1, 0.454902, 0.368627, 1)
-energy = 4.8
-texture = ExtResource("8_lpely")
-texture_scale = 2.0
+energy = 7.17
+range_z_max = 0
+range_layer_min = -100
+texture = ExtResource("9_ihq0t")
+texture_scale = 9.54
 
 [node name="PointLight2D3" type="PointLight2D" parent="Lights"]
 color = Color(0.996078, 0.145098, 0, 1)
-energy = 13.44
+energy = 11.0
+range_z_max = 0
+range_layer_min = -100
 texture = ExtResource("8_lpely")
 
 [node name="PointLight2D4" type="PointLight2D" parent="Lights"]
 color = Color(0.321569, 0.321569, 0.321569, 1)
-energy = 4.98
-blend_mode = 2
+energy = 3.6
+range_z_max = 0
 range_layer_min = -100
 shadow_enabled = true
-shadow_color = Color(0, 0, 0, 0.698039)
+shadow_color = Color(0, 0, 0, 1)
 texture = ExtResource("9_ihq0t")
 texture_scale = 9.11
 
 [node name="PointLight2D5" type="PointLight2D" parent="Lights"]
 position = Vector2(0, -6)
 color = Color(1, 0.407843, 0.32549, 1)
-energy = 7.62
+energy = 1.83
+range_z_max = 1
 range_layer_min = -100
-range_layer_max = -1
 texture = ExtResource("8_lpely")
 texture_scale = 0.5
 
