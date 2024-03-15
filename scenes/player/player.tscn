@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://bd0wkxiatophh"]
+[gd_scene load_steps=15 format=3 uid="uid://bd0wkxiatophh"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_222uv"]
 [ext_resource type="Texture2D" uid="uid://dy3x7uf1388do" path="res://scenes/player/player_temp.png" id="2_8f45w"]
 [ext_resource type="Script" path="res://scripts/PlayerHealth.gd" id="3_ix52x"]
 [ext_resource type="PackedScene" uid="uid://cb5o5n2xsmvkh" path="res://components/health_component.tscn" id="4_0mhdc"]
+[ext_resource type="Material" uid="uid://83727x6flun0" path="res://assets/shaders/damage_flash_material.tres" id="4_rwiqh"]
 [ext_resource type="PackedScene" uid="uid://vp0aej2eo7yy" path="res://components/hurtbox_component.tscn" id="5_hp0i7"]
 [ext_resource type="PackedScene" uid="uid://dqe7p8u5luxl1" path="res://components/hitbox_component.tscn" id="6_ch317"]
 
@@ -20,7 +21,7 @@ size = Vector2(3, 19)
 size = Vector2(3, 19)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ubgli"]
-size = Vector2(8, 11.25)
+size = Vector2(8, 19.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_twnfx"]
 size = Vector2(28, 18)
@@ -38,6 +39,7 @@ script = ExtResource("3_ix52x")
 [node name="HealthComponent" parent="." instance=ExtResource("4_0mhdc")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("4_rwiqh")
 position = Vector2(0, -2)
 scale = Vector2(0.026, 0.026)
 texture = ExtResource("2_8f45w")
@@ -139,24 +141,27 @@ wait_time = 0.05
 [node name="DamageIntervalTimer" type="Timer" parent="Timers"]
 
 [node name="AttackTimer" type="Timer" parent="Timers"]
-wait_time = 0.3
+wait_time = 0.05
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(0, 5.625)
+position = Vector2(0, 1.625)
 shape = SubResource("RectangleShape2D_ubgli")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("6_ch317")]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(14, 0)
 shape = SubResource("RectangleShape2D_twnfx")
 disabled = true
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent", "myHitboxComponent") instance=ExtResource("5_hp0i7")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent", "myHitboxComponent", "sprite") instance=ExtResource("5_hp0i7")]
+visible = false
 healthComponent = NodePath("../HealthComponent")
 myHitboxComponent = NodePath("../HitboxComponent")
+sprite = NodePath("../Sprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("RectangleShape2D_63lwt")

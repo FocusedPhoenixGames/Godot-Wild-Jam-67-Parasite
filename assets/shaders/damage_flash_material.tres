@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://83727x6flun0"]
+
+[ext_resource type="Shader" path="res://assets/shaders/damage_flash.gdshader" id="1_ev0s6"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_ev0s6")
+shader_parameter/whiten = 0.0
