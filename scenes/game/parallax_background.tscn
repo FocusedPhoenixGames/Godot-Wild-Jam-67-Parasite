@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1tk7nansmic3"]
+
+[ext_resource type="Texture2D" uid="uid://dtm1gr8vgfoun" path="res://assets/map/lab_wall_with_tubes.png" id="1_x3s5y"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(1.05, 1.05)
+motion_mirroring = Vector2(640, 360)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+modulate = Color(0.188235, 0.188235, 0.188235, 1)
+texture = ExtResource("1_x3s5y")
+centered = false

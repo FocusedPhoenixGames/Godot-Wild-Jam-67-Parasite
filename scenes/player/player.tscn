@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bd0wkxiatophh"]
+[gd_scene load_steps=17 format=3 uid="uid://bd0wkxiatophh"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_222uv"]
 [ext_resource type="Texture2D" uid="uid://dy3x7uf1388do" path="res://scenes/player/player_temp.png" id="2_8f45w"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://vp0aej2eo7yy" path="res://components/hurtbox_component.tscn" id="5_hp0i7"]
 [ext_resource type="PackedScene" uid="uid://dqe7p8u5luxl1" path="res://components/hitbox_component.tscn" id="6_ch317"]
 [ext_resource type="PackedScene" uid="uid://ddy3n2drispss" path="res://scenes/player/parasite_component.tscn" id="7_psfo0"]
+[ext_resource type="Texture2D" uid="uid://c4ecekdo4yf8v" path="res://assets/misc/light.png" id="8_lpely"]
+[ext_resource type="Texture2D" uid="uid://ciyxqcedcscpx" path="res://assets/misc/small_light.png" id="9_ihq0t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m26t1"]
 size = Vector2(10, 2.5)
@@ -39,6 +41,7 @@ script = ExtResource("3_ix52x")
 [node name="HealthComponent" parent="." instance=ExtResource("4_0mhdc")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
 position = Vector2(0, -2)
 scale = Vector2(0.026, 0.026)
 texture = ExtResource("2_8f45w")
@@ -166,6 +169,53 @@ sprite = NodePath("../Sprite2D")
 shape = SubResource("RectangleShape2D_63lwt")
 
 [node name="ParasiteComponent" parent="." instance=ExtResource("7_psfo0")]
+
+[node name="Lights" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights"]
+visible = false
+color = Color(1, 0.760784, 0.713726, 1)
+energy = 1.2
+range_layer_min = -100
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 2
+texture = ExtResource("8_lpely")
+texture_scale = 2.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="Lights"]
+color = Color(1, 0.454902, 0.368627, 1)
+energy = 4.8
+texture = ExtResource("8_lpely")
+texture_scale = 2.0
+
+[node name="PointLight2D3" type="PointLight2D" parent="Lights"]
+color = Color(0.996078, 0.145098, 0, 1)
+energy = 13.44
+texture = ExtResource("8_lpely")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Lights"]
+color = Color(0.321569, 0.321569, 0.321569, 1)
+energy = 4.98
+blend_mode = 2
+range_layer_min = -100
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.698039)
+texture = ExtResource("9_ihq0t")
+texture_scale = 9.11
+
+[node name="PointLight2D5" type="PointLight2D" parent="Lights"]
+position = Vector2(0, -6)
+color = Color(1, 0.407843, 0.32549, 1)
+energy = 7.62
+range_layer_min = -100
+range_layer_max = -1
+texture = ExtResource("8_lpely")
+texture_scale = 0.5
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_spike_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
