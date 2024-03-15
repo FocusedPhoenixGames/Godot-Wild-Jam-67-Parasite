@@ -221,5 +221,5 @@ range_layer_min = -100
 texture = ExtResource("8_lpely")
 texture_scale = 0.5
 
-[connection signal="body_entered" from="Hitbox" to="." method="_on_spike_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_spike_entered"]
