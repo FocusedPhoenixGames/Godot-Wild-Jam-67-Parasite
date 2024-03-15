@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://btglmx5p233s4"]
+[gd_scene load_steps=9 format=3 uid="uid://btglmx5p233s4"]
 
 [ext_resource type="Texture2D" uid="uid://cupg0o8lvh8h5" path="res://icon.svg" id="1_6pm1k"]
 [ext_resource type="PackedScene" uid="uid://dqe7p8u5luxl1" path="res://components/hitbox_component.tscn" id="4_lls5g"]
 [ext_resource type="PackedScene" uid="uid://cb5o5n2xsmvkh" path="res://components/health_component.tscn" id="5_2m20l"]
+[ext_resource type="PackedScene" uid="uid://cfjhv4c6b18jf" path="res://components/infectable_component.tscn" id="5_m6ypm"]
 [ext_resource type="PackedScene" uid="uid://vp0aej2eo7yy" path="res://components/hurtbox_component.tscn" id="6_ehdxr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uq2dd"]
@@ -38,3 +39,6 @@ texture = ExtResource("1_6pm1k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_amq1j")
+
+[node name="InfectableComponent" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("5_m6ypm")]
+enemy = NodePath("..")

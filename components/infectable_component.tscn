@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfjhv4c6b18jf"]
+
+[ext_resource type="Script" path="res://components/infectable_component.gd" id="1_d28om"]
+[ext_resource type="Texture2D" uid="uid://cjby03han0lav" path="res://assets/gui/interact_button.png" id="3_cuw6h"]
+
+[node name="InfectableComponent" type="Node"]
+script = ExtResource("1_d28om")
+
+[node name="Button" type="Button" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Button"]
+visible = false
+position = Vector2(8, 8)
+scale = Vector2(0.590909, 0.590909)
+texture = ExtResource("3_cuw6h")
