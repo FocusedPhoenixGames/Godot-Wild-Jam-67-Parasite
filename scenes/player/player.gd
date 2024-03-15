@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-const Ability = preload("res://scripts/ability_constants.gd").Ability
+enum Ability { WALL_JUMP, CLIMBING, DASH }
 enum State { NORMAL, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE }
 
 #region Variables
@@ -37,7 +37,9 @@ enum State { NORMAL, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE }
 @onready var topLeftCast: RayCast2D = $NudgeCasts/TopLeftCast
 @onready var healthComponent: HealthComponent = $HealthComponent
 @onready var hitboxComponent: HitboxComponent = $HitboxComponent
+@onready var hurtboxComponent: HurtboxComponent = $HurtboxComponent
 @onready var parasiteComponent: ParasiteComponent = $ParasiteComponent
+@onready var animation: AnimationPlayer = $AnimationPlayer
 
 var jumpBuffered: bool = false
 var jumpStartTime: float = 0.0
@@ -63,7 +65,7 @@ var wasOnWall: bool = false
 var isAttachedToWall: bool = true
 
 var state = State.NORMAL
-var abilities = []
+var abilities = [Ability.WALL_JUMP, Ability.CLIMBING, Ability.DASH]
 
 var ghost_scene = preload("res://scenes/player/dash_trail.tscn")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -78,7 +80,6 @@ func _ready():
 	damageIntervalTimer.timeout.connect(on_damage_interval_timer_timeout)
 	healthComponent.health_changed.connect(on_health_changed)
 	attackTimer.timeout.connect(reset_attack)
-	parasiteComponent.abilities_changed.connect(update_abilities)
 
 func _physics_process(delta):
 	state = get_updated_state()
@@ -102,16 +103,16 @@ func is_near_wall() -> bool:
 	wallDir = 0
 	return false
 
-func get_updated_state() -> State:
+func get_updated_state() -> playerState:
 	isOnWall = is_near_wall()
 	
-	if state == State.WALL_JUMPING || state == State.WALL_JUMP_DECLINE:
+	if state == playerState.WALL_JUMPING || state == playerState.WALL_JUMP_DECLINE:
 		return state
 	
 	if abilities.has(Ability.CLIMBING):
 		if isOnWall and Input.is_action_pressed("climb"):
-			return State.CLIMBING
-	return State.NORMAL
+			return playerState.CLIMBING
+	return playerState.NORMAL
 
 func normal_state(delta):
 	apply_gravity(delta)
@@ -371,10 +372,9 @@ func _on_spike_entered(body):
 #region Damage
 func on_health_changed() -> void:
 	# player takes no damage if damageIntervalTimer is running
-	if !damageIntervalTimer.is_stopped():
+	if !hurtboxComponent.has_overlapping_areas() || !damageIntervalTimer.is_stopped():
 		return
 	
-	print(healthComponent.currentHealth)
 	damageIntervalTimer.start()
 
 func on_damage_interval_timer_timeout() -> void:
@@ -397,6 +397,3 @@ func reset_attack_shape():
 
 func reset_attack():
 	attackAvailable = true
-
-func update_abilities():
-	abilities = parasiteComponent.abilities
