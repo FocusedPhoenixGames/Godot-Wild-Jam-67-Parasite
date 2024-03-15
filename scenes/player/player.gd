@@ -37,6 +37,7 @@ enum State { NORMAL, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE }
 @onready var topLeftCast: RayCast2D = $NudgeCasts/TopLeftCast
 @onready var healthComponent: HealthComponent = $HealthComponent
 @onready var hitboxComponent: HitboxComponent = $HitboxComponent
+@onready var hurtboxComponent: HurtboxComponent = $HurtboxComponent
 
 var jumpBuffered: bool = false
 var jumpStartTime: float = 0.0
@@ -369,7 +370,7 @@ func _on_spike_entered(body):
 #region Damage
 func on_health_changed() -> void:
 	# player takes no damage if damageIntervalTimer is running
-	if !damageIntervalTimer.is_stopped():
+	if !hurtboxComponent.has_overlapping_areas() || !damageIntervalTimer.is_stopped():
 		return
 	
 	print(healthComponent.currentHealth)
