@@ -118,6 +118,9 @@ radius = 61.9839
 [node name="Cheetah" type="CharacterBody2D"]
 collision_layer = 8
 collision_mask = 9
+<<<<<<< HEAD
+>>>>>>> 59f6ad90001ada4b9b7d7aa67d6460aaa17b04e3
+=======
 >>>>>>> 59f6ad90001ada4b9b7d7aa67d6460aaa17b04e3
 
 [node name="Cheetah" type="CharacterBody2D"]
