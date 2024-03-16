@@ -115,8 +115,8 @@ size = Vector2(18, 16)
 size = Vector2(170, 47)
 
 [node name="Cheetah" type="CharacterBody2D"]
-collision_layer = 8
-collision_mask = 9
+collision_layer = 10
+collision_mask = 11
 script = ExtResource("1_ncpgu")
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_lbchf")]
@@ -151,8 +151,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(4, 8)
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_yr38f")
 
 [node name="FiniteStateMachine" type="Node2D" parent="."]
@@ -177,4 +176,5 @@ shape = SubResource("RectangleShape2D_thxs5")
 
 [node name="InfectableComponent" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("10_q463b")]
 enemy = NodePath("..")
+spriteOffsetY = 2.0
 abilities = Array[int]([2])

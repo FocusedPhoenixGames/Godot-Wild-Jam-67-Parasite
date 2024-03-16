@@ -118,8 +118,8 @@ size = Vector2(26, 30)
 size = Vector2(170, 47)
 
 [node name="Dog" type="CharacterBody2D"]
-collision_layer = 8
-collision_mask = 9
+collision_layer = 10
+collision_mask = 11
 script = ExtResource("1_p13us")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_ejspf")]
@@ -180,4 +180,5 @@ shape = SubResource("RectangleShape2D_thxs5")
 
 [node name="InfectableComponent" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("10_g8pt8")]
 enemy = NodePath("..")
+spriteOffsetY = -7.0
 abilities = Array[int]([0, 1])

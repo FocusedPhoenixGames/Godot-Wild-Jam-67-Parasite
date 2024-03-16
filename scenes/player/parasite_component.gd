@@ -34,6 +34,9 @@ func infect(infectable: InfectableComponent):
 	sprite.hframes = enemySprite.hframes
 	sprite.vframes = enemySprite.vframes
 	sprite.frame = enemySprite.frame
+	print("pos1: ", sprite.position.y)
+	sprite.position.y += infectable.spriteOffsetY
+	print("pos2: ", sprite.position.y)
 	
 	var enemyPlayer = infectable.enemy.get_node("AnimationPlayer").duplicate() as AnimationPlayer
 	enemyPlayer.name = "EnemyPlayer"
@@ -54,6 +57,7 @@ func reset():
 	sprite.hframes = originalSprite.hframes
 	sprite.vframes = originalSprite.vframes
 	sprite.frame = originalSprite.frame
+	sprite.position.y = originalSprite.position.y
 	
 	var oldEnemyPlayer = get_parent().get_node("EnemyPlayer")
 	if oldEnemyPlayer:

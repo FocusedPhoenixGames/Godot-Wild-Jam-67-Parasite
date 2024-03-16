@@ -4,7 +4,8 @@ class_name InfectableComponent
 const Ability = preload("res://scripts/ability_constants.gd").Ability
 
 @export var enemy: Node
-@export var healthPercentage = 33.4
+@export var healthPercentage: float = 33.4
+@export var spriteOffsetY: float = 0.0
 @export var abilities: Array[Ability]
 
 @onready var button: Button = $Button
@@ -30,10 +31,11 @@ func _ready():
 	update_pos()
 
 func _process(delta):
+	update_pos()
+	
 	if not hovered:
 		return
 	
-	update_pos()
 	if Input.is_action_just_pressed("interact"):
 		var parasiteComponent = player.get_node("ParasiteComponent")
 		parasiteComponent.infect(self)
