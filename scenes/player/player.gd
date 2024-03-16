@@ -307,6 +307,7 @@ func handle_movement(delta):
 		facingDir = hor_dir
 		animation.play("walk")
 	else:
+		animation.play("idle")
 		if state == State.WALL_JUMPING and hor_dir != wallJumpDir:
 			return
 		
@@ -319,8 +320,10 @@ func handle_wall_movement(delta):
 	
 	var ver_dir = Input.get_axis("move_up", "move_down")
 	if ver_dir:
+		animation.play("walk")
 		velocity.y = ver_dir * speed * delta
 	else:
+		animation.play("idle")
 		# Slows down player, only relevant when additional forces are applied
 		velocity.y = move_toward(velocity.y, 0, speed * delta)
 
