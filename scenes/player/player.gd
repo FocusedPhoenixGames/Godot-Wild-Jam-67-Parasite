@@ -7,7 +7,7 @@ enum State { NORMAL, JUMPING, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE }
 #region Variables
 @export var speed: float = 140.0 * 60 # Physic Updates
 @export var climbSpeed: float = 80.0
-@export var jumpVelocity: float = -250.0 -15.625
+@export var jumpVelocity: float = -350.0 -15.625
 @export var jumpBufferTime: float = 0.1
 
 @export var wallJumpCooldown: float = 0.2
