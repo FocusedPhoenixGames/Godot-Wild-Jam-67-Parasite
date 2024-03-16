@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/StateMachine/Chase.gd" id="9_u68ga"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cogbr"]
+height = 46.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lgpx0"]
 
@@ -110,7 +111,7 @@ _data = {
 size = Vector2(18, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_thxs5"]
-size = Vector2(160, 47)
+size = Vector2(170, 47)
 
 [node name="Cheetah" type="CharacterBody2D"]
 collision_layer = 8
@@ -120,15 +121,17 @@ script = ExtResource("1_ncpgu")
 [node name="HealthComponent" parent="." instance=ExtResource("1_lbchf")]
 
 [node name="HitboxComponent" parent="." instance=ExtResource("2_k6jra")]
+cooldown = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(-13, -4)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_cogbr")
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent", "myHitboxComponent") instance=ExtResource("3_kevrj")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent", "myHitboxComponent", "sprite") instance=ExtResource("3_kevrj")]
+visible = false
 healthComponent = NodePath("../HealthComponent")
 myHitboxComponent = NodePath("../HitboxComponent")
+sprite = NodePath("../Sprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(1, 0)
@@ -146,6 +149,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(4, 8)
 shape = SubResource("RectangleShape2D_yr38f")
 
@@ -165,5 +169,6 @@ script = ExtResource("9_u68ga")
 unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+visible = false
 position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_thxs5")

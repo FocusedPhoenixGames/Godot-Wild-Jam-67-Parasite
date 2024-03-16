@@ -216,10 +216,11 @@ position = Vector2(14, 0)
 shape = SubResource("RectangleShape2D_twnfx")
 disabled = true
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent", "myHitboxComponent") instance=ExtResource("5_hp0i7")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent", "myHitboxComponent", "sprite") instance=ExtResource("5_hp0i7")]
 visible = false
 healthComponent = NodePath("../HealthComponent")
 myHitboxComponent = NodePath("../HitboxComponent")
+sprite = NodePath("../Sprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("RectangleShape2D_63lwt")
