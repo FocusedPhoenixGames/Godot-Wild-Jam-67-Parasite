@@ -103,16 +103,16 @@ func is_near_wall() -> bool:
 	wallDir = 0
 	return false
 
-func get_updated_state() -> playerState:
+func get_updated_state():
 	isOnWall = is_near_wall()
 	
-	if state == playerState.WALL_JUMPING || state == playerState.WALL_JUMP_DECLINE:
+	if state == State.WALL_JUMPING || state == State.WALL_JUMP_DECLINE:
 		return state
 	
 	if abilities.has(Ability.CLIMBING):
 		if isOnWall and Input.is_action_pressed("climb"):
-			return playerState.CLIMBING
-	return playerState.NORMAL
+			return State.CLIMBING
+	return State.NORMAL
 
 func normal_state(delta):
 	apply_gravity(delta)
@@ -305,6 +305,7 @@ func handle_movement(delta):
 			velocity.x = velocity.lerp(Vector2(hor_dir * speed * delta, velocity.y), 0.1).x
 		
 		facingDir = hor_dir
+		animation.play("walk")
 	else:
 		if state == State.WALL_JUMPING and hor_dir != wallJumpDir:
 			return

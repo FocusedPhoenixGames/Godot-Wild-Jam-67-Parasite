@@ -1,4 +1,4 @@
-extends State
+extends StateMachine
 
 
 func enter():
@@ -6,5 +6,5 @@ func enter():
 	animation_player.play("attack")
 
 func transition():
-	if owner.direction.length() > 30:
+	if owner.direction.length() > 1:
 		get_parent().change_state("Chase")

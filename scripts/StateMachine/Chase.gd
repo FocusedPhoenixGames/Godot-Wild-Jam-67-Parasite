@@ -1,4 +1,4 @@
-extends State
+extends StateMachine
 
 
 func enter():
@@ -13,7 +13,7 @@ func exit():
 func transition():
 	var distance = owner.direction.length()
 	
-	if distance < 30:
+	if distance < 1:
 		get_parent().change_state("Attack")
 
 
