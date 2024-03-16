@@ -426,7 +426,7 @@ func play_animation(animName: String):
 	var animPlayer = animation
 	var enemyPlayer = get_node_or_null("EnemyPlayer")
 	if enemyPlayer:
-		print("enemyplayer")
+		#print("enemyplayer")
 		animPlayer = enemyPlayer
 	
 	#print("------")

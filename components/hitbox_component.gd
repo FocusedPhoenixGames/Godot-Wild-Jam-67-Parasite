@@ -8,8 +8,11 @@ class_name HitboxComponent
 
 func start_attack_cooldown():
 	if cooldown > 0.0:
-		collisionShape.disabled = true
-		get_tree().create_timer(cooldown).timeout.connect(reset_collider)
+		call_deferred("disable_collider")
+
+func disable_collider():
+	collisionShape.disabled = true
+	get_tree().create_timer(cooldown).timeout.connect(reset_collider)
 
 func reset_collider():
 	collisionShape.disabled = false

@@ -1,15 +1,15 @@
-[gd_scene load_steps=21 format=3 uid="uid://dwse7tfiateik"]
+[gd_scene load_steps=21 format=3 uid="uid://dltvcpearooxb"]
 
-[ext_resource type="PackedScene" uid="uid://cb5o5n2xsmvkh" path="res://components/health_component.tscn" id="1_lbchf"]
-[ext_resource type="Script" path="res://scenes/enemy/cheetah.gd" id="1_ncpgu"]
-[ext_resource type="PackedScene" uid="uid://dqe7p8u5luxl1" path="res://components/hitbox_component.tscn" id="2_k6jra"]
-[ext_resource type="PackedScene" uid="uid://vp0aej2eo7yy" path="res://components/hurtbox_component.tscn" id="3_kevrj"]
-[ext_resource type="Texture2D" uid="uid://d2f5777ret32p" path="res://scenes/enemy/cheetah.png" id="4_s17h5"]
-[ext_resource type="Script" path="res://scripts/StateMachine/FiniteStateMachine.gd" id="5_cx6ht"]
-[ext_resource type="Script" path="res://scripts/StateMachine/Idle.gd" id="7_prxhv"]
-[ext_resource type="Script" path="res://scripts/StateMachine/Attack.gd" id="8_4q8rq"]
-[ext_resource type="Script" path="res://scripts/StateMachine/Chase.gd" id="9_u68ga"]
-[ext_resource type="PackedScene" uid="uid://cfjhv4c6b18jf" path="res://components/infectable_component.tscn" id="10_q463b"]
+[ext_resource type="Script" path="res://scenes/enemy/cheetah.gd" id="1_p13us"]
+[ext_resource type="PackedScene" uid="uid://cb5o5n2xsmvkh" path="res://components/health_component.tscn" id="2_ejspf"]
+[ext_resource type="PackedScene" uid="uid://dqe7p8u5luxl1" path="res://components/hitbox_component.tscn" id="3_dvs4f"]
+[ext_resource type="PackedScene" uid="uid://vp0aej2eo7yy" path="res://components/hurtbox_component.tscn" id="4_gjkch"]
+[ext_resource type="Texture2D" uid="uid://dc65q723l8iaj" path="res://scenes/enemy/dog/dog_sprite_shee.png" id="5_ivp4q"]
+[ext_resource type="Script" path="res://scripts/StateMachine/FiniteStateMachine.gd" id="6_3nabv"]
+[ext_resource type="Script" path="res://scripts/StateMachine/Idle.gd" id="7_0ifdw"]
+[ext_resource type="Script" path="res://scripts/StateMachine/Attack.gd" id="8_ioda0"]
+[ext_resource type="Script" path="res://scripts/StateMachine/Chase.gd" id="9_k5yvk"]
+[ext_resource type="PackedScene" uid="uid://cfjhv4c6b18jf" path="res://components/infectable_component.tscn" id="10_g8pt8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cogbr"]
 height = 46.0
@@ -45,7 +45,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2i(3, 3), Vector2i(2, 3), Vector2i(1, 3), Vector2i(0, 3)]
+"values": [Vector2i(0, 3), Vector2i(1, 3), Vector2i(2, 3), Vector2i(3, 3)]
 }
 
 [sub_resource type="Animation" id="Animation_ggms0"]
@@ -62,7 +62,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2i(3, 0), Vector2i(2, 0), Vector2i(1, 0), Vector2i(0, 0)]
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_y7hkt"]
@@ -79,7 +79,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2i(3, 2), Vector2i(2, 2), Vector2i(1, 2), Vector2i(0, 2)]
+"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2)]
 }
 
 [sub_resource type="Animation" id="Animation_47r3u"]
@@ -96,7 +96,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2i(3, 1), Vector2i(2, 1), Vector2i(1, 1), Vector2i(0, 1)]
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i0x7b"]
@@ -117,18 +117,18 @@ size = Vector2(170, 47)
 [node name="Cheetah" type="CharacterBody2D"]
 collision_layer = 8
 collision_mask = 9
-script = ExtResource("1_ncpgu")
+script = ExtResource("1_p13us")
 
-[node name="HealthComponent" parent="." instance=ExtResource("1_lbchf")]
+[node name="HealthComponent" parent="." instance=ExtResource("2_ejspf")]
 
-[node name="HitboxComponent" parent="." instance=ExtResource("2_k6jra")]
+[node name="HitboxComponent" parent="." instance=ExtResource("3_dvs4f")]
 cooldown = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_cogbr")
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent", "myHitboxComponent", "sprite") instance=ExtResource("3_kevrj")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent", "myHitboxComponent", "sprite") instance=ExtResource("4_gjkch")]
 visible = false
 healthComponent = NodePath("../HealthComponent")
 myHitboxComponent = NodePath("../HitboxComponent")
@@ -140,9 +140,9 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_lgpx0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("4_s17h5")
-hframes = 4
-vframes = 4
+texture = ExtResource("5_ivp4q")
+hframes = 7
+vframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -155,16 +155,16 @@ position = Vector2(4, 8)
 shape = SubResource("RectangleShape2D_yr38f")
 
 [node name="FiniteStateMachine" type="Node2D" parent="."]
-script = ExtResource("5_cx6ht")
+script = ExtResource("6_3nabv")
 
 [node name="Idle" type="Node2D" parent="FiniteStateMachine"]
-script = ExtResource("7_prxhv")
+script = ExtResource("7_0ifdw")
 
 [node name="Attack" type="Node2D" parent="FiniteStateMachine"]
-script = ExtResource("8_4q8rq")
+script = ExtResource("8_ioda0")
 
 [node name="Chase" type="Node2D" parent="FiniteStateMachine"]
-script = ExtResource("9_u68ga")
+script = ExtResource("9_k5yvk")
 
 [node name="PlayerDetection" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -174,6 +174,6 @@ visible = false
 position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_thxs5")
 
-[node name="InfectableComponent" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("10_q463b")]
+[node name="InfectableComponent" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("10_g8pt8")]
 enemy = NodePath("..")
 abilities = Array[int]([2])

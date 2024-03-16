@@ -16,3 +16,6 @@ layer_0/tile_data = PackedInt32Array(2424898, 196608, 3, 2490434, 196608, 4, 255
 
 [node name="Cheetah" parent="." instance=ExtResource("4_kptrr")]
 position = Vector2(990, 575)
+
+[node name="Cheetah2" parent="." instance=ExtResource("4_kptrr")]
+position = Vector2(697, 575)
