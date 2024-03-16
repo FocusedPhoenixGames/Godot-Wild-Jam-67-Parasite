@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bvabb4lgyanfc"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://bvabb4lgyanfc"]
 
 [ext_resource type="FontFile" uid="uid://cdmwh6k0kkp25" path="res://assets/fonts/TripleN.ttf" id="1_qfw7w"]
 
@@ -12,6 +12,9 @@ bg_color = Color(0.0117647, 0.0627451, 0.0862745, 1)
 bg_color = Color(0.980392, 0.721569, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d5co8"]
+bg_color = Color(1, 0.447059, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_diajw"]
 bg_color = Color(1, 0.447059, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qerfn"]
@@ -38,5 +41,11 @@ Label/constants/outline_size = 4
 Label/constants/shadow_outline_size = 8
 Label/font_sizes/font_size = 20
 Label/fonts/font = ExtResource("1_qfw7w")
+LinkButton/colors/font_focus_color = Color(1, 0.447059, 0, 1)
+LinkButton/colors/font_hover_color = Color(1, 0.447059, 0, 1)
+LinkButton/colors/font_outline_color = Color(0, 0, 0, 1)
+LinkButton/constants/outline_size = 4
+LinkButton/fonts/font = ExtResource("1_qfw7w")
+LinkButton/styles/focus = SubResource("StyleBoxFlat_diajw")
 Panel/styles/panel = SubResource("StyleBoxFlat_qerfn")
 PanelContainer/styles/panel = SubResource("StyleBoxLine_q7h3y")

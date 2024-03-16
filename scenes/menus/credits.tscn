@@ -1,0 +1,144 @@
+[gd_scene load_steps=4 format=3 uid="uid://dr5kkbfbg5r4t"]
+
+[ext_resource type="Theme" uid="uid://bvabb4lgyanfc" path="res://resources/themes/theme.tres" id="1_6y8bt"]
+[ext_resource type="Script" path="res://scenes/menus/credits.gd" id="1_ldr2l"]
+[ext_resource type="PackedScene" uid="uid://c4sjs0ci6ebcp" path="res://scenes/menus/sound_button.tscn" id="2_u0cf2"]
+
+[node name="Credits" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_ldr2l")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("1_6y8bt")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="CreditsLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_6y8bt")
+theme_override_font_sizes/font_size = 36
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ArtLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_6y8bt")
+text = "Art"
+horizontal_alignment = 1
+
+[node name="Moric0Button" type="LinkButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../../../BackButton")
+focus_neighbor_bottom = NodePath("../VaarbButton")
+focus_next = NodePath("../VaarbButton")
+focus_previous = NodePath("../../../BackButton")
+theme = ExtResource("1_6y8bt")
+text = "moric0"
+underline = 1
+uri = "https://moric0.itch.io/"
+
+[node name="VaarbButton" type="LinkButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../Moric0Button")
+focus_neighbor_bottom = NodePath("../DavidButton")
+focus_next = NodePath("../DavidButton")
+focus_previous = NodePath("../Moric0Button")
+theme = ExtResource("1_6y8bt")
+text = "Vaarb"
+underline = 1
+uri = "https://thevaarb.itch.io/"
+
+[node name="MusicLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_6y8bt")
+text = "Music"
+horizontal_alignment = 1
+
+[node name="DavidButton" type="LinkButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../VaarbButton")
+focus_neighbor_bottom = NodePath("../FPGButton")
+focus_next = NodePath("../FPGButton")
+focus_previous = NodePath("../VaarbButton")
+theme = ExtResource("1_6y8bt")
+text = "davidadamsoundworks"
+underline = 1
+uri = "https://www.instagram.com/davidadamsoundworks"
+
+[node name="ProgrammingLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_6y8bt")
+text = "Programming"
+horizontal_alignment = 1
+
+[node name="FPGButton" type="LinkButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../DavidButton")
+focus_neighbor_bottom = NodePath("../FrenzoButton")
+focus_next = NodePath("../FrenzoButton")
+focus_previous = NodePath("../DavidButton")
+theme = ExtResource("1_6y8bt")
+text = "Focused Phoenix Games"
+underline = 1
+uri = "https://focused-phoenix.itch.io"
+
+[node name="FrenzoButton" type="LinkButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../FPGButton")
+focus_neighbor_bottom = NodePath("../AstaButton")
+focus_next = NodePath("../AstaButton")
+focus_previous = NodePath("../FPGButton")
+theme = ExtResource("1_6y8bt")
+text = "Frenzo"
+underline = 1
+uri = "https://alfrenzo.itch.io/"
+
+[node name="AstaButton" type="LinkButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../FrenzoButton")
+focus_neighbor_bottom = NodePath("../../../BackButton")
+focus_next = NodePath("../../../BackButton")
+focus_previous = NodePath("../FrenzoButton")
+theme = ExtResource("1_6y8bt")
+text = "Asta"
+underline = 1
+uri = "https://x-senku.itch.io/"
+
+[node name="BackButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("2_u0cf2")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../MarginContainer/VBoxContainer/AstaButton")
+focus_neighbor_bottom = NodePath("../MarginContainer/VBoxContainer/Moric0Button")
+focus_next = NodePath("../MarginContainer/VBoxContainer/Moric0Button")
+focus_previous = NodePath("../MarginContainer/VBoxContainer/AstaButton")
+theme = ExtResource("1_6y8bt")
+text = "Back"
