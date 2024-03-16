@@ -3,7 +3,7 @@ extends CharacterBody2D
 var speed : float = 100
 var direction : Vector2
 
-@onready var player = get_parent().find_child("Player")
+@onready var player = get_tree().root.get_node("Game").get_node("Player")
 @onready var sprite = $Sprite2D
 
 
