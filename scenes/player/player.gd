@@ -206,6 +206,8 @@ func instance_ghost():
 	ghost.texture = sprite.texture
 	ghost.flip_h = sprite.flip_h
 	ghost.scale = sprite.scale
+	ghost.hframes = sprite.hframes
+	ghost.vframes = sprite.vframes
 
 # Ran multiple times throughout dash
 func on_ghost_timer_timeout():
