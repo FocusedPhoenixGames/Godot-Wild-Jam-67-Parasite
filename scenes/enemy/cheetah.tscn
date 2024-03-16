@@ -176,5 +176,4 @@ shape = SubResource("RectangleShape2D_thxs5")
 
 [node name="InfectableComponent" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("10_q463b")]
 enemy = NodePath("..")
-spriteOffsetY = 2.0
 abilities = Array[int]([2])

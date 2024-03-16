@@ -27,4 +27,7 @@ func heal(healAmount: int):
 func check_death():
 	if currentHealth == 0:
 		died.emit()
-		owner.queue_free()
+		if owner == Player:
+			#owner.queue_free()
+			get_tree().change_scene_to_file("res://scenes/menus/title_screen.tscn")
+		else: owner.queue_free()
