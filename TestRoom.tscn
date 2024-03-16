@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ubg2p1rj6cmf" path="res://scenes/tile_map.tscn" id="1_4yu1b"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_m7au6"]
 [ext_resource type="PackedScene" uid="uid://ctjv8juuowmws" path="res://scenes/game/save_point.tscn" id="3_tg5o8"]
-[ext_resource type="PackedScene" uid="uid://dltvcpearooxb" path="res://scenes/enemy/dog/dog.tscn" id="4_dogwo"]
+[ext_resource type="PackedScene" uid="uid://b1dsswtgxokej" path="res://scenes/enemy/fly/fly.tscn" id="4_45ns8"]
 
 [node name="TestRoom" type="Node2D"]
 
@@ -14,5 +14,5 @@ layer_0/tile_data = PackedInt32Array(2424898, 196608, 3, 2490434, 196608, 4, 255
 
 [node name="SavePoint" parent="." instance=ExtResource("3_tg5o8")]
 
-[node name="Dog" parent="." instance=ExtResource("4_dogwo")]
-position = Vector2(929, 577)
+[node name="Fly" parent="." instance=ExtResource("4_45ns8")]
+position = Vector2(966, 562)
