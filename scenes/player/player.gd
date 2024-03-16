@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 enum Ability { WALL_JUMP, CLIMBING, DASH }
-enum State { NORMAL, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE }
+enum State { NORMAL, JUMPING, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE }
 
 #region Variables
 @export var speed: float = 140.0 * 60 # Physic Updates
@@ -65,7 +65,7 @@ var wasOnWall: bool = false
 var isAttachedToWall: bool = true
 
 var state = State.NORMAL
-var abilities = [Ability.WALL_JUMP, Ability.CLIMBING, Ability.DASH]
+var abilities = []
 
 var ghost_scene = preload("res://scenes/player/dash_trail.tscn")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -80,12 +80,14 @@ func _ready():
 	damageIntervalTimer.timeout.connect(on_damage_interval_timer_timeout)
 	healthComponent.health_changed.connect(on_health_changed)
 	attackTimer.timeout.connect(reset_attack)
+	parasiteComponent.abilities_changed.connect(update_abilities)
 
 func _physics_process(delta):
 	state = get_updated_state()
+	#print(state)
 	
 	match state:
-		State.NORMAL,State.WALL_JUMPING,State.WALL_JUMP_DECLINE:
+		State.NORMAL,State.WALL_JUMPING,State.WALL_JUMP_DECLINE,State.JUMPING:
 			normal_state(delta)
 		State.CLIMBING:
 			climbing_state(delta)
@@ -112,11 +114,18 @@ func get_updated_state():
 	if abilities.has(Ability.CLIMBING):
 		if isOnWall and Input.is_action_pressed("climb"):
 			return State.CLIMBING
+	
+	if state == State.JUMPING:
+		return state
+	
 	return State.NORMAL
 
 func normal_state(delta):
 	apply_gravity(delta)
 	isOnFloor = is_on_floor() || groundDetector.has_overlapping_bodies()
+	if isOnFloor and state == State.JUMPING:
+		state = State.NORMAL
+	
 	wasOnFloor = isOnFloor
 	wasOnWall = isOnWall
 	handle_attack()
@@ -208,6 +217,7 @@ func instance_ghost():
 	ghost.scale = sprite.scale
 	ghost.hframes = sprite.hframes
 	ghost.vframes = sprite.vframes
+	ghost.frame = sprite.frame
 
 # Ran multiple times throughout dash
 func on_ghost_timer_timeout():
@@ -261,6 +271,8 @@ func switch_to_normal_state():
 	state = State.NORMAL
 
 func jump():
+	state = State.JUMPING
+	play_animation("jump")
 	jumpStartTime = Time.get_ticks_msec()
 	velocity.y = jumpVelocity
 
@@ -307,9 +319,12 @@ func handle_movement(delta):
 			velocity.x = velocity.lerp(Vector2(hor_dir * speed * delta, velocity.y), 0.1).x
 		
 		facingDir = hor_dir
-		animation.play("walk")
+		if state != State.JUMPING:
+			play_animation("walk")
 	else:
-		animation.play("idle")
+		if state != State.JUMPING:
+			play_animation("idle")
+		
 		if state == State.WALL_JUMPING and hor_dir != wallJumpDir:
 			return
 		
@@ -322,10 +337,10 @@ func handle_wall_movement(delta):
 	
 	var ver_dir = Input.get_axis("move_up", "move_down")
 	if ver_dir:
-		animation.play("walk")
+		play_animation("walk")
 		velocity.y = ver_dir * speed * delta
 	else:
-		animation.play("idle")
+		play_animation("idle")
 		# Slows down player, only relevant when additional forces are applied
 		velocity.y = move_toward(velocity.y, 0, speed * delta)
 
@@ -403,3 +418,19 @@ func reset_attack_shape():
 
 func reset_attack():
 	attackAvailable = true
+
+func update_abilities():
+	abilities = parasiteComponent.abilities
+
+func play_animation(animName: String):
+	var animPlayer = animation
+	var enemyPlayer = get_node_or_null("EnemyPlayer")
+	if enemyPlayer:
+		print("enemyplayer")
+		animPlayer = enemyPlayer
+	
+	#print("------")
+	#for node in get_children():
+		#print("node: ", node.name)
+	
+	animPlayer.play(animName)
