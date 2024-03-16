@@ -6,5 +6,5 @@ func enter():
 	animation_player.play("attack")
 
 func transition():
-	if owner.direction.length() > 20:
+	if owner.direction.length() >= 20.0:
 		get_parent().change_state("Chase")

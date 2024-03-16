@@ -7,6 +7,8 @@ var direction : Vector2
 
 @onready var player = get_tree().root.get_node("Game").get_node("Player")
 @onready var sprite = $Sprite2D
+@onready var stateMachine = $FiniteStateMachine
+@onready var chaseState = $FiniteStateMachine/Chase
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -17,7 +19,9 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-	if not flying_enemy:
+	if stateMachine.current_state != chaseState:
+		velocity.x = 0.0
+	elif not flying_enemy:
 		velocity.x = direction.normalized().x * speed * delta
 	else:
 		velocity = direction.normalized() * speed * delta

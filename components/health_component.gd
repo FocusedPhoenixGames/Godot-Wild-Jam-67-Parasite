@@ -17,7 +17,6 @@ func damage(damageAmount: int):
 	currentHealth = clamp(currentHealth - damageAmount, 0, maxHealth)
 	health_changed.emit()
 	
-	print(currentHealth)
 	Callable(check_death).call_deferred()
 
 
