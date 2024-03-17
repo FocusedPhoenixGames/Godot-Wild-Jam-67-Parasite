@@ -94,8 +94,6 @@ func _physics_process(delta):
 			normal_state(delta)
 		State.CLIMBING:
 			climbing_state(delta)
-		State.DEAD:
-			handle_skip_death_scene()
 
 #region States and Abilities
 func is_near_wall() -> bool:
@@ -457,10 +455,10 @@ func on_death():
 	tween.tween_callback(death_message)
 	
 	var tween2 = get_tree().create_tween()
-	tween2.tween_property(deathText, "modulate:a", 1.0, 1.0)
+	tween2.tween_property(deathText, "modulate:a", 1.0, 0.8)
 	var tween3 = get_tree().create_tween()
-	tween3.tween_property(deathTextBg, "modulate:a", 0.8, 1.0)
+	tween3.tween_property(deathTextBg, "modulate:a", 0.8, 0.8)
 
 func death_message():
-	await get_tree().create_timer(2.0).timeout
-	get_tree().change_scene_to_file("res://scenes/menus/title_screen.tscn")
+	await get_tree().create_timer(1.2).timeout
+	get_tree().change_scene_to_file("res://scenes/game/game.tscn")

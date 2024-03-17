@@ -125,18 +125,8 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 10
 script = ExtResource("1_222uv")
-speed = null
-climbSpeed = null
-jumpVelocity = null
-jumpBufferTime = null
-wallJumpCooldown = null
-attackCooldown = null
-fallMultiplier = null
-lowJumpMultiplier = null
-wallJumpsPushAway = null
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_0mhdc")]
-maxHealth = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
