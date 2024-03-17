@@ -11,11 +11,13 @@ const Ability = preload("res://scripts/ability_constants.gd").Ability
 
 @onready var button: Button = $Button
 @onready var outlineMaterialRes: ShaderMaterial = preload("res://assets/shaders/outline.tres")
+@onready var infectableParticles: PackedScene = preload("res://scenes/particles/infectable_particles.tscn")
 
 var healthComponent: HealthComponent
 var interactSprite: Sprite2D
 var player
 var sprite
+var particles
 
 var hovered = false
 
@@ -45,9 +47,15 @@ func _process(delta):
 func on_health_changed():
 	var currentPercent = healthComponent.currentHealth as float / healthComponent.maxHealth
 	if currentPercent <= healthPercentage / 100.0:
+		particles = infectableParticles.instantiate()
+		get_parent().add_child(particles)
+		
 		button.disabled = false
 		button.visible = true
 	else:
+		if particles:
+			particles.queue_free()
+		
 		button.disabled = true
 		button.visible = false
 
