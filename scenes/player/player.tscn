@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bd0wkxiatophh"]
+[gd_scene load_steps=25 format=3 uid="uid://bd0wkxiatophh"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_222uv"]
 [ext_resource type="PackedScene" uid="uid://cb5o5n2xsmvkh" path="res://components/health_component.tscn" id="4_0mhdc"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://c4ecekdo4yf8v" path="res://assets/misc/light.png" id="8_lpely"]
 [ext_resource type="Texture2D" uid="uid://ciyxqcedcscpx" path="res://assets/misc/small_light.png" id="9_ihq0t"]
 [ext_resource type="Texture2D" uid="uid://clqymr4xdm6br" path="res://scenes/player/death_background.png" id="9_ncre7"]
+[ext_resource type="Texture2D" uid="uid://cyr3ina6asvuj" path="res://scenes/player/healthbar.png" id="10_tppri"]
+[ext_resource type="Script" path="res://scenes/player/HealthbarSprite.gd" id="11_s5hno"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m26t1"]
 size = Vector2(8, 3)
@@ -331,6 +333,7 @@ texture = ExtResource("9_ncre7")
 
 [node name="DeathText" type="RichTextLabel" parent="DeathText"]
 modulate = Color(1, 1, 1, 0)
+layout_mode = 0
 offset_left = -92.2011
 offset_top = -31.3981
 offset_right = 121.799
@@ -348,6 +351,13 @@ offset_top = 238.0
 offset_right = 474.0
 offset_bottom = 264.0
 text = "Press 'Shift' to dash"
+
+[node name="HealthbarSprite" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(17, 29)
+scale = Vector2(1.64, 1.64)
+texture = ExtResource("10_tppri")
+hframes = 10
+script = ExtResource("11_s5hno")
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_spike_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
