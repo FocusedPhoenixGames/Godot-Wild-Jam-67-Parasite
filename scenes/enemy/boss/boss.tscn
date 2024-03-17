@@ -171,6 +171,7 @@ script = ExtResource("1_oarrk")
 projectile = ExtResource("2_8d1ux")
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_vtfhu")]
+maxHealth = 30
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("4_xlbl4")
@@ -221,6 +222,7 @@ script = ExtResource("11_fb2qq")
 
 [node name="HitboxComponent2" parent="." instance=ExtResource("2_imtks")]
 visible = false
+cooldown = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent2"]
 position = Vector2(-1.06692e-11, 105.769)
@@ -229,6 +231,7 @@ shape = SubResource("CapsuleShape2D_5wynn")
 
 [node name="HitboxComponent3" parent="." instance=ExtResource("2_imtks")]
 visible = false
+cooldown = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent3"]
 position = Vector2(-6.2962e-13, 19.2307)
