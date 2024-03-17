@@ -42,6 +42,7 @@ enum State { NORMAL, JUMPING, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE, DEAD }
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var deathText: RichTextLabel = $DeathText/DeathText
 @onready var deathTextBg: Sprite2D = $DeathText/DeathTextBg
+@onready var attackAnimScene: PackedScene = preload("res://scenes/player/attack_animation.tscn")
 
 var jumpBuffered: bool = false
 var jumpStartTime: float = 0.0
@@ -419,12 +420,35 @@ func on_damage_interval_timer_timeout() -> void:
 func handle_attack():
 	if Input.is_action_just_pressed("left_click"):
 		if attackAvailable:
+			var attackAnim = attackAnimScene.instantiate()
+			add_child(attackAnim)
+			var attackAnimPlayer: AnimationPlayer = attackAnim.get_child(0)
+			attackAnimPlayer.play("attack")
+			clear_attack_animations()
+			
+			if facingDir == 1:
+				attackAnim.flip_h = false
+			else:
+				attackAnim.flip_h = true
+			
 			var shape = hitboxComponent.get_node("CollisionShape2D")
 			shape.global_position.x = global_position.x + ((shape.shape.size.x / 2) * facingDir)
+			attackAnim.global_position.x = shape.global_position.x + (5 * facingDir)
 			shape.disabled = false
 			attackAvailable = false
 			get_tree().create_timer(0.1).timeout.connect(reset_attack_shape)
 			attackTimer.start()
+
+func clear_attack_animations():
+	for child in get_children():
+		if child == animation:
+			return
+		if !child is AnimationPlayer:
+			return
+		if child.is_playing():
+			return
+		child.queue_free()
+	
 
 func reset_attack_shape():
 	var shape = hitboxComponent.get_node("CollisionShape2D")

@@ -1,0 +1,363 @@
+[gd_scene load_steps=25 format=3 uid="uid://bd0wkxiatophh"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_222uv"]
+[ext_resource type="PackedScene" uid="uid://cb5o5n2xsmvkh" path="res://components/health_component.tscn" id="4_0mhdc"]
+[ext_resource type="Texture2D" uid="uid://bqre445q2635q" path="res://scenes/player/shroom_guy_animations.png" id="4_w5ppk"]
+[ext_resource type="PackedScene" uid="uid://vp0aej2eo7yy" path="res://components/hurtbox_component.tscn" id="5_hp0i7"]
+[ext_resource type="PackedScene" uid="uid://dqe7p8u5luxl1" path="res://components/hitbox_component.tscn" id="6_ch317"]
+[ext_resource type="PackedScene" uid="uid://ddy3n2drispss" path="res://scenes/player/parasite_component.tscn" id="7_psfo0"]
+[ext_resource type="Texture2D" uid="uid://c4ecekdo4yf8v" path="res://assets/misc/light.png" id="8_lpely"]
+[ext_resource type="Texture2D" uid="uid://ciyxqcedcscpx" path="res://assets/misc/small_light.png" id="9_ihq0t"]
+[ext_resource type="Texture2D" uid="uid://clqymr4xdm6br" path="res://scenes/player/death_background.png" id="9_ncre7"]
+[ext_resource type="Texture2D" uid="uid://cyr3ina6asvuj" path="res://scenes/player/healthbar.png" id="10_tppri"]
+[ext_resource type="Script" path="res://scenes/player/HealthbarSprite.gd" id="11_s5hno"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m26t1"]
+size = Vector2(8, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hcdcb"]
+size = Vector2(8, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehhp6"]
+size = Vector2(3, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x6tip"]
+size = Vector2(3, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubgli"]
+size = Vector2(8, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twnfx"]
+size = Vector2(28, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_63lwt"]
+size = Vector2(8, 19)
+
+[sub_resource type="Animation" id="Animation_adq1q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_b3ver"]
+resource_name = "die"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(5, 6)]
+}
+
+[sub_resource type="Animation" id="Animation_uoscl"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c74iq"]
+resource_name = "jump"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 3), Vector2i(1, 3), Vector2i(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_ww04b"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4jd5l"]
+_data = {
+"RESET": SubResource("Animation_adq1q"),
+"die": SubResource("Animation_b3ver"),
+"idle": SubResource("Animation_uoscl"),
+"jump": SubResource("Animation_c74iq"),
+"walk": SubResource("Animation_ww04b")
+}
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 10
+script = ExtResource("1_222uv")
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_0mhdc")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(0, -3)
+texture = ExtResource("4_w5ppk")
+hframes = 7
+vframes = 8
+
+[node name="GroundDetector" type="Area2D" parent="."]
+visible = false
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundDetector"]
+position = Vector2(0, 14.5)
+shape = SubResource("RectangleShape2D_m26t1")
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_hcdcb")
+
+[node name="NudgeCasts" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BottomRightCast" type="RayCast2D" parent="NudgeCasts"]
+position = Vector2(4, 13)
+target_position = Vector2(1, 0)
+collision_mask = 2
+
+[node name="TopRightCast" type="RayCast2D" parent="NudgeCasts"]
+position = Vector2(4, 9)
+target_position = Vector2(1, 0)
+collision_mask = 2
+
+[node name="BottomLeftCast" type="RayCast2D" parent="NudgeCasts"]
+position = Vector2(-4, 13)
+target_position = Vector2(-1, 0)
+collision_mask = 2
+
+[node name="TopLeftCast" type="RayCast2D" parent="NudgeCasts"]
+position = Vector2(-4, 9)
+target_position = Vector2(-1, 0)
+collision_mask = 2
+
+[node name="WallDetectors" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WallDetectorRight" type="Area2D" parent="WallDetectors"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallDetectors/WallDetectorRight"]
+position = Vector2(5.5, 2.5)
+shape = SubResource("RectangleShape2D_ehhp6")
+
+[node name="WallDetectorLeft" type="Area2D" parent="WallDetectors"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallDetectors/WallDetectorLeft"]
+position = Vector2(-5.5, 2.5)
+shape = SubResource("RectangleShape2D_x6tip")
+
+[node name="Timers" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CoyoteTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+one_shot = true
+
+[node name="WallJumpTimer" type="Timer" parent="Timers"]
+wait_time = 0.3
+one_shot = true
+
+[node name="ClimbingTimer" type="Timer" parent="Timers"]
+
+[node name="WallCoyoteTimer" type="Timer" parent="Timers"]
+wait_time = 0.2
+one_shot = true
+
+[node name="WallJumpPauseTimer" type="Timer" parent="Timers"]
+wait_time = 0.15
+one_shot = true
+
+[node name="WallJumpDeclineTimer" type="Timer" parent="Timers"]
+wait_time = 0.2
+one_shot = true
+
+[node name="DashTrailTimer" type="Timer" parent="Timers"]
+wait_time = 0.05
+
+[node name="DamageIntervalTimer" type="Timer" parent="Timers"]
+
+[node name="AttackTimer" type="Timer" parent="Timers"]
+wait_time = 0.05
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_ubgli")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("6_ch317")]
+isEnemy = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(14, 0)
+shape = SubResource("RectangleShape2D_twnfx")
+disabled = true
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent", "myHitboxComponent", "sprite") instance=ExtResource("5_hp0i7")]
+visible = false
+healthComponent = NodePath("../HealthComponent")
+myHitboxComponent = NodePath("../HitboxComponent")
+sprite = NodePath("../Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_63lwt")
+
+[node name="ParasiteComponent" parent="." instance=ExtResource("7_psfo0")]
+
+[node name="Lights" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights"]
+visible = false
+color = Color(1, 0.760784, 0.713726, 1)
+energy = 1.2
+range_layer_min = -100
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 2
+texture = ExtResource("8_lpely")
+texture_scale = 2.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="Lights"]
+color = Color(1, 0.454902, 0.368627, 1)
+energy = 7.17
+range_z_max = 0
+range_layer_min = -100
+texture = ExtResource("9_ihq0t")
+texture_scale = 9.54
+
+[node name="PointLight2D3" type="PointLight2D" parent="Lights"]
+color = Color(0.996078, 0.145098, 0, 1)
+energy = 11.0
+range_z_max = 0
+range_layer_min = -100
+texture = ExtResource("8_lpely")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Lights"]
+color = Color(0.321569, 0.321569, 0.321569, 1)
+energy = 3.6
+range_z_max = 0
+range_layer_min = -100
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("9_ihq0t")
+texture_scale = 9.11
+
+[node name="PointLight2D5" type="PointLight2D" parent="Lights"]
+position = Vector2(0, -6)
+color = Color(1, 0.407843, 0.32549, 1)
+energy = 1.83
+range_z_max = 1
+range_layer_min = -100
+texture = ExtResource("8_lpely")
+texture_scale = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4jd5l")
+}
+
+[node name="DeathText" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DeathTextBg" type="Sprite2D" parent="DeathText"]
+modulate = Color(1, 1, 1, 0)
+light_mask = 0
+z_index = -1
+position = Vector2(2.79891, -2.39806)
+scale = Vector2(1.95726, 1.85012)
+texture = ExtResource("9_ncre7")
+
+[node name="DeathText" type="RichTextLabel" parent="DeathText"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -92.2011
+offset_top = -31.3981
+offset_right = 121.799
+offset_bottom = 34.6019
+scale = Vector2(0.989518, 0.989518)
+theme_override_font_sizes/normal_font_size = 41
+text = "YOU DIED"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AbilityTooltip" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+offset_left = 317.0
+offset_top = 238.0
+offset_right = 474.0
+offset_bottom = 264.0
+text = "Press 'Shift' to dash"
+
+[node name="HealthbarSprite" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(17, 29)
+scale = Vector2(1.64, 1.64)
+texture = ExtResource("10_tppri")
+hframes = 10
+script = ExtResource("11_s5hno")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_spike_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
