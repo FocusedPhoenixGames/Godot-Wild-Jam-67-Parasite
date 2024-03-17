@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhc671lyr0jmc"]
+[gd_scene load_steps=7 format=3 uid="uid://bhc671lyr0jmc"]
 
 [ext_resource type="PackedScene" uid="uid://ubg2p1rj6cmf" path="res://scenes/tile_map.tscn" id="1_kpcr0"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_sauu4"]
 [ext_resource type="PackedScene" uid="uid://b6fyqb5urbmtb" path="res://scenes/game/platform.tscn" id="3_swlk3"]
 [ext_resource type="PackedScene" uid="uid://bxwouaa3aklml" path="res://scenes/foilage_tile_map.tscn" id="4_u1wkt"]
 [ext_resource type="PackedScene" uid="uid://bhiqy6rfcyeny" path="res://scenes/pipe_tile_map.tscn" id="5_6d7ot"]
+[ext_resource type="PackedScene" uid="uid://dwse7tfiateik" path="res://scenes/enemy/cheetah.tscn" id="6_pqdue"]
 
 [node name="TestRoom2" type="Node2D"]
 
@@ -33,3 +34,6 @@ layer_0/tile_data = PackedInt32Array(524296, 2, 0, 589832, 2, 1, 524301, 65538, 
 [node name="PipeTileMap" parent="." instance=ExtResource("5_6d7ot")]
 z_index = -1
 layer_0/tile_data = PackedInt32Array(524301, 1, 0, 524302, 65537, 0, 524303, 65537, 0, 524304, 131073, 0, 589844, 327681, 2, 524308, 327681, 0, 1114147, 131073, 0, 1114146, 65537, 0, 1114145, 65537, 0, 1114144, 65537, 0, 1114143, 65537, 0, 1114142, 65537, 0, 1114141, 65537, 0, 1114140, 1, 0, 720928, 327681, 0, 786464, 327681, 2, 1114126, 131073, 0, 1114125, 65537, 0, 1114124, 65537, 0, 1114123, 1, 0, 720899, 327681, 0, 786435, 327681, 1, 851971, 327681, 2, 720901, 327681, 0, 786437, 327681, 2)
+
+[node name="Cheetah" parent="." instance=ExtResource("6_pqdue")]
+position = Vector2(370, 303)
