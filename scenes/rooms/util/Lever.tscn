@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pxe6w"]
 size = Vector2(74, 32)
 
-[node name="Lever" type="Node"]
+[node name="Lever" type="Node2D"]
 
 [node name="Doors" type="Node" parent="."]
 

@@ -10,6 +10,7 @@ extends Area2D
 @onready var leverSprite: Sprite2D = $Sprite2D
 @onready var player = get_tree().root.get_node("Game").get_node("Player")
 @onready var doors = $"../Doors".get_children()
+#@onready var doors = get_tree().get_node("LockableDoors").get_children()
 
 var hovered = false
 var hasPlayer = false

@@ -4,9 +4,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onsnx"]
 resource_local_to_scene = true
-size = Vector2(32, 32)
+size = Vector2(96, 160)
 
-[node name="LockableDoors" type="Node"]
+[node name="LockableDoors" type="Node2D"]
 script = ExtResource("1_wkv20")
 
 [node name="Area2D" type="Area2D" parent="."]

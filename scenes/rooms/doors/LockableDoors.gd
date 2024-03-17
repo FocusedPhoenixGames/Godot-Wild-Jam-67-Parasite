@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 @export var doorsLocked: bool = false
 @export var tile: int = 0
