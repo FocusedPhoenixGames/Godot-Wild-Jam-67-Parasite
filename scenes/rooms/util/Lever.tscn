@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://baqlln1nkdk7x"]
+
+[ext_resource type="Script" path="res://scenes/rooms/util/lever.gd" id="1_8krjl"]
+[ext_resource type="Texture2D" uid="uid://c82lgtu8qj1i1" path="res://scenes/rooms/util/lever.png" id="1_d8kw7"]
+[ext_resource type="Texture2D" uid="uid://cjby03han0lav" path="res://assets/gui/interact_button.png" id="2_fad3e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pxe6w"]
+size = Vector2(74, 32)
+
+[node name="Lever" type="Node"]
+
+[node name="Doors" type="Node" parent="."]
+
+[node name="LeverLogic" type="Area2D" parent="."]
+script = ExtResource("1_8krjl")
+
+[node name="Sprite2D" type="Sprite2D" parent="LeverLogic"]
+texture = ExtResource("1_d8kw7")
+hframes = 2
+
+[node name="Button" type="Button" parent="LeverLogic"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="Sprite2D" type="Sprite2D" parent="LeverLogic/Button"]
+visible = false
+position = Vector2(16, 16)
+scale = Vector2(0.590909, 0.590909)
+texture = ExtResource("2_fad3e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeverLogic"]
+shape = SubResource("RectangleShape2D_pxe6w")

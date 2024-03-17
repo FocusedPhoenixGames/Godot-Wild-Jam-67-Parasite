@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bhc671lyr0jmc"]
+[gd_scene load_steps=4 format=3 uid="uid://bhc671lyr0jmc"]
 
 [ext_resource type="PackedScene" uid="uid://ubg2p1rj6cmf" path="res://scenes/tile_map.tscn" id="1_kpcr0"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_sauu4"]
 [ext_resource type="PackedScene" uid="uid://b6fyqb5urbmtb" path="res://scenes/game/platform.tscn" id="3_swlk3"]
-[ext_resource type="PackedScene" uid="uid://dltvcpearooxb" path="res://scenes/enemy/dog/dog.tscn" id="4_kmeid"]
 
 [node name="TestRoom2" type="Node2D"]
 
@@ -24,6 +23,3 @@ position = Vector2(158, 253)
 
 [node name="Platform3" parent="." instance=ExtResource("3_swlk3")]
 position = Vector2(928, 0)
-
-[node name="Dog" parent="." instance=ExtResource("4_kmeid")]
-position = Vector2(380, 292)
