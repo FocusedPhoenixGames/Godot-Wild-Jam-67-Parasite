@@ -35,7 +35,6 @@ func check_death():
 			#get_tree().change_scene_to_file("res://scenes/menus/title_screen.tscn")
 			pass
 		else:
-			print("yo")
 			var particles = deathParticles.instantiate()
 			get_tree().root.add_child(particles)
 			particles.global_position = owner.global_position
