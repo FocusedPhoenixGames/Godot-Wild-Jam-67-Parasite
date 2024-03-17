@@ -34,13 +34,17 @@ func _draw() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if event.pressed:
-			# Toggle visibility when pressing M.
-			if event.keycode == KEY_M:
-				visible = not visible
-				if visible:
-					update_offset()
+	#if event is InputEventKey:
+		#if event.pressed:
+			## Toggle visibility when pressing M.
+			#if event.keycode == KEY_M:
+				#visible = not visible
+				#if visible:
+					#update_offset()
+	if event.is_action_pressed("map"):
+		visible = not visible
+		if visible:
+			update_offset()
 
 
 func update_offset():
