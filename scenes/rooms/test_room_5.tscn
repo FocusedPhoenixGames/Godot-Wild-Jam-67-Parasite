@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6l1qiy68b0me"]
+[gd_scene load_steps=10 format=3 uid="uid://c6l1qiy68b0me"]
 
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_lja1a"]
 [ext_resource type="PackedScene" uid="uid://ubg2p1rj6cmf" path="res://scenes/tile_map.tscn" id="2_vfx1a"]
 [ext_resource type="PackedScene" uid="uid://ctjv8juuowmws" path="res://scenes/game/save_point.tscn" id="3_1aqnx"]
 [ext_resource type="PackedScene" uid="uid://baqlln1nkdk7x" path="res://scenes/rooms/util/Lever.tscn" id="4_rwyyf"]
+[ext_resource type="PackedScene" uid="uid://clc64swwtjo4l" path="res://scenes/enemy/snake/snake.tscn" id="5_d3pdi"]
+[ext_resource type="PackedScene" uid="uid://dltvcpearooxb" path="res://scenes/enemy/dog/dog.tscn" id="6_qb71v"]
+[ext_resource type="PackedScene" uid="uid://b1dsswtgxokej" path="res://scenes/enemy/fly/fly.tscn" id="7_827mm"]
+[ext_resource type="PackedScene" uid="uid://dwse7tfiateik" path="res://scenes/enemy/cheetah.tscn" id="8_5bf6j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6gw2j"]
 size = Vector2(20, 63)
@@ -28,5 +32,34 @@ shape = SubResource("RectangleShape2D_6gw2j")
 [node name="LeverLogic" parent="Lever" index="1" node_paths=PackedStringArray("tilemap")]
 tile = 25
 tilemap = NodePath("../../TileMap")
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Snake" parent="Enemies" instance=ExtResource("5_d3pdi")]
+position = Vector2(1069, 626)
+
+[node name="Snake2" parent="Enemies" instance=ExtResource("5_d3pdi")]
+position = Vector2(481, 498)
+
+[node name="Snake3" parent="Enemies" instance=ExtResource("5_d3pdi")]
+position = Vector2(646, 496)
+
+[node name="Dog" parent="Enemies" instance=ExtResource("6_qb71v")]
+position = Vector2(79, 616)
+
+[node name="Dog2" parent="Enemies" instance=ExtResource("6_qb71v")]
+position = Vector2(907, 617)
+
+[node name="Fly" parent="Enemies" instance=ExtResource("7_827mm")]
+position = Vector2(258, 310)
+
+[node name="Fly2" parent="Enemies" instance=ExtResource("7_827mm")]
+position = Vector2(135, 134)
+
+[node name="Cheetah" parent="Enemies" instance=ExtResource("8_5bf6j")]
+position = Vector2(378, 623)
+
+[node name="Cheetah2" parent="Enemies" instance=ExtResource("8_5bf6j")]
+position = Vector2(669, 622)
 
 [editable path="Lever"]

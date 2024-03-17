@@ -14,6 +14,9 @@ var switchDir: bool = false
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var rng = RandomNumberGenerator.new()
 
+func _ready():
+	$HealthComponent.died.connect(on_dead)
+
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -42,3 +45,6 @@ func shoot_projectile():
 	
 	proj.linear_velocity = Vector2(x, -300.0)
 	proj.global_position = global_position + Vector2(0, -50)
+
+func on_dead():
+	get_tree().change_scene_to_file("res://scenes/end/end_screen.tscn")

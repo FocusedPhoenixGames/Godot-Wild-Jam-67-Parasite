@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bx6sc4cd4nu5k"]
+[gd_scene load_steps=9 format=3 uid="uid://bx6sc4cd4nu5k"]
 
 [ext_resource type="PackedScene" uid="uid://ubg2p1rj6cmf" path="res://scenes/tile_map.tscn" id="1_cbm23"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_uyabw"]
 [ext_resource type="PackedScene" uid="uid://b6fyqb5urbmtb" path="res://scenes/game/platform.tscn" id="3_mj0wa"]
+[ext_resource type="PackedScene" uid="uid://dltvcpearooxb" path="res://scenes/enemy/dog/dog.tscn" id="4_gpbxr"]
+[ext_resource type="PackedScene" uid="uid://dwse7tfiateik" path="res://scenes/enemy/cheetah.tscn" id="5_ny3o7"]
+[ext_resource type="PackedScene" uid="uid://b1dsswtgxokej" path="res://scenes/enemy/fly/fly.tscn" id="6_kture"]
+[ext_resource type="PackedScene" uid="uid://baqlln1nkdk7x" path="res://scenes/rooms/util/Lever.tscn" id="7_u4y1l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i1peb"]
+size = Vector2(20, 160)
 
 [node name="TestRoom3" type="Node2D"]
 
@@ -28,3 +35,38 @@ position = Vector2(1009, 406)
 
 [node name="Platform7" parent="." instance=ExtResource("3_mj0wa")]
 position = Vector2(1012, 352)
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Dog" parent="Enemies" instance=ExtResource("4_gpbxr")]
+position = Vector2(789, 232)
+
+[node name="Dog2" parent="Enemies" instance=ExtResource("4_gpbxr")]
+position = Vector2(93, 233)
+
+[node name="Cheetah" parent="Enemies" instance=ExtResource("5_ny3o7")]
+position = Vector2(723, 592)
+
+[node name="Cheetah2" parent="Enemies" instance=ExtResource("5_ny3o7")]
+position = Vector2(170, 592)
+
+[node name="Fly" parent="Enemies" instance=ExtResource("6_kture")]
+position = Vector2(70, 51)
+
+[node name="Fly2" parent="Enemies" instance=ExtResource("6_kture")]
+position = Vector2(507, 178)
+
+[node name="Fly3" parent="Enemies" instance=ExtResource("6_kture")]
+position = Vector2(724, 365)
+
+[node name="Lever" parent="." instance=ExtResource("7_u4y1l")]
+position = Vector2(67, 466)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lever/Doors" index="0"]
+position = Vector2(19, 174)
+shape = SubResource("RectangleShape2D_i1peb")
+
+[node name="LeverLogic" parent="Lever" index="1" node_paths=PackedStringArray("tilemap")]
+tilemap = NodePath("../../TileMap")
+
+[editable path="Lever"]

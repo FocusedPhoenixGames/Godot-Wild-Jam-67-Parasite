@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1cpda77rlh84"]
+[gd_scene load_steps=7 format=3 uid="uid://b1cpda77rlh84"]
 
 [ext_resource type="PackedScene" uid="uid://ubg2p1rj6cmf" path="res://scenes/tile_map.tscn" id="1_4yu1b"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_m7au6"]
 [ext_resource type="PackedScene" uid="uid://ctjv8juuowmws" path="res://scenes/game/save_point.tscn" id="3_tg5o8"]
 [ext_resource type="PackedScene" uid="uid://b6fyqb5urbmtb" path="res://scenes/game/platform.tscn" id="5_1xbdu"]
+[ext_resource type="Texture2D" uid="uid://b4al3f3si33rx" path="res://assets/start_tube.png" id="5_phyfx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k4bgl"]
+size = Vector2(38, 9)
 
 [node name="TestRoom" type="Node2D"]
 
@@ -29,3 +33,14 @@ position = Vector2(29, 284)
 
 [node name="Platform5" parent="." instance=ExtResource("5_1xbdu")]
 position = Vector2(29, 223)
+
+[node name="Tube" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Tube"]
+position = Vector2(126, 554)
+texture = ExtResource("5_phyfx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tube"]
+position = Vector2(126, 574.5)
+shape = SubResource("RectangleShape2D_k4bgl")

@@ -29,7 +29,7 @@ func heal(healAmount: int):
 func check_death():
 	if currentHealth == 0:
 		dead = true
-		died.emit()
+		
 		if owner is Player:
 			#owner.queue_free()
 			#get_tree().change_scene_to_file("res://scenes/menus/title_screen.tscn")
@@ -41,3 +41,5 @@ func check_death():
 			particles.emitting = true
 			particles.finished.connect(queue_free)
 			owner.queue_free()
+		
+		died.emit()

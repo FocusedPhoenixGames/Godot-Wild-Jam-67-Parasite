@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dm1l3obkahq6d"]
+[gd_scene load_steps=6 format=3 uid="uid://dm1l3obkahq6d"]
 
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_eo6oj"]
 [ext_resource type="PackedScene" uid="uid://ubg2p1rj6cmf" path="res://scenes/tile_map.tscn" id="2_d73ho"]
 [ext_resource type="PackedScene" uid="uid://b6fyqb5urbmtb" path="res://scenes/game/platform.tscn" id="3_72y71"]
+[ext_resource type="PackedScene" uid="uid://clc64swwtjo4l" path="res://scenes/enemy/snake/snake.tscn" id="4_5fx02"]
+[ext_resource type="PackedScene" uid="uid://b1dsswtgxokej" path="res://scenes/enemy/fly/fly.tscn" id="5_oa7ll"]
 
 [node name="TestRoom4" type="Node2D"]
 
@@ -20,3 +22,23 @@ position = Vector2(606, 462)
 
 [node name="Platform3" parent="." instance=ExtResource("3_72y71")]
 position = Vector2(385, 342)
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Snake" parent="Enemies" instance=ExtResource("4_5fx02")]
+position = Vector2(64, 627)
+
+[node name="Snake2" parent="Enemies" instance=ExtResource("4_5fx02")]
+position = Vector2(1045, 626)
+
+[node name="Snake3" parent="Enemies" instance=ExtResource("4_5fx02")]
+position = Vector2(822, 627)
+
+[node name="Snake4" parent="Enemies" instance=ExtResource("4_5fx02")]
+position = Vector2(652, 626)
+
+[node name="Fly" parent="Enemies" instance=ExtResource("5_oa7ll")]
+position = Vector2(420, 98)
+
+[node name="Fly2" parent="Enemies" instance=ExtResource("5_oa7ll")]
+position = Vector2(698, 254)
