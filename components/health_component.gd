@@ -5,6 +5,7 @@ signal died
 signal health_changed
 
 @export var maxHealth: int = 10
+@onready var deathParticles: PackedScene = preload("res://scenes/particles/death_particles.tscn")
 
 var currentHealth: int
 var dead: bool = false
@@ -34,4 +35,10 @@ func check_death():
 			#get_tree().change_scene_to_file("res://scenes/menus/title_screen.tscn")
 			pass
 		else:
+			print("yo")
+			var particles = deathParticles.instantiate()
+			get_tree().root.add_child(particles)
+			particles.global_position = owner.global_position
+			particles.emitting = true
+			particles.finished.connect(queue_free)
 			owner.queue_free()

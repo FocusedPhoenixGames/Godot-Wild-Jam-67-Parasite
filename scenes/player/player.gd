@@ -40,8 +40,8 @@ enum State { NORMAL, JUMPING, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE, DEAD }
 @onready var hurtboxComponent: HurtboxComponent = $HurtboxComponent
 @onready var parasiteComponent: ParasiteComponent = $ParasiteComponent
 @onready var animation: AnimationPlayer = $AnimationPlayer
-@onready var deathText: RichTextLabel = $DeathText
-@onready var deathTextBg: Sprite2D = $DeathTextBg
+@onready var deathText: RichTextLabel = $DeathText/DeathText
+@onready var deathTextBg: Sprite2D = $DeathText/DeathTextBg
 
 var jumpBuffered: bool = false
 var jumpStartTime: float = 0.0

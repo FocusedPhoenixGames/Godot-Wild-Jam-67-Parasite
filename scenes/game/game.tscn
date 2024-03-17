@@ -47,7 +47,7 @@ _data = {
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_b0jny")
-startingMap = "scenes/rooms/TestRoom3.tscn"
+startingMap = "scenes/rooms/TestRoom2.tscn"
 
 [node name="Player" parent="." instance=ExtResource("1_fhpq0")]
 position = Vector2(201, 132)

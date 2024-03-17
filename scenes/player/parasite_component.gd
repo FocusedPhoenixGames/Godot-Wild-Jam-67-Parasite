@@ -3,9 +3,13 @@ class_name ParasiteComponent
 
 signal abilities_changed
 
+const Ability = preload("res://scripts/ability_constants.gd").Ability
+
 var sprite: Sprite2D
 var animationPlayer: AnimationPlayer
 var originalSprite: Sprite2D
+
+@onready var abilityTooltip: RichTextLabel = $"../CanvasLayer/AbilityTooltip"
 
 var abilities = []
 
@@ -50,6 +54,7 @@ func infect(infectable: InfectableComponent):
 	get_parent().global_position = infectable.enemy.global_position
 	abilities = infectable.abilities
 	abilities_changed.emit()
+	show_ability_tooltip()
 
 func reset():
 	sprite.texture = originalSprite.texture
@@ -66,3 +71,14 @@ func reset():
 	
 	abilities = []
 	abilities_changed.emit()
+
+func show_ability_tooltip():
+	if abilities.has(Ability.DASH):
+		abilityTooltip.text = "Press 'Shift' to dash"
+	elif abilities.has(Ability.CLIMBING):
+		abilityTooltip.text = "Hold 'L' to climb walls"
+	else:
+		return
+	abilityTooltip.visible = true
+	await get_tree().create_timer(5).timeout
+	abilityTooltip.visible = false

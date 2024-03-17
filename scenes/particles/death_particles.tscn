@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxuebkf8t5tbv"]
+
+[ext_resource type="Texture2D" uid="uid://y1uilyjlnmgs" path="res://scenes/particles/death_particles.png" id="1_s4f7x"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_guo5g"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_jcou8"]
+_data = [Vector2(0, 0.769231), 0.0, 0.0, 0, 0, Vector2(1, 0.648352), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5ij3w"]
+curve = SubResource("Curve_jcou8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ylnsc"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 12.9
+radial_velocity_min = 60.0
+radial_velocity_max = 70.0
+gravity = Vector3(0, 60, 0)
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_5ij3w")
+anim_speed_min = 0.8
+anim_speed_max = 1.0
+
+[node name="DeathParticles" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_guo5g")
+emitting = false
+amount = 24
+process_material = SubResource("ParticleProcessMaterial_ylnsc")
+texture = ExtResource("1_s4f7x")
+lifetime = 0.4
+one_shot = true
+speed_scale = 1.4
+explosiveness = 0.62
+randomness = 1.0

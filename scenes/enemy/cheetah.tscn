@@ -169,6 +169,7 @@ script = ExtResource("9_u68ga")
 
 [node name="PlayerDetection" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
 position = Vector2(0, -7)

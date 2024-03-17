@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bx6sc4cd4nu5k"]
+[gd_scene load_steps=4 format=3 uid="uid://bx6sc4cd4nu5k"]
 
 [ext_resource type="PackedScene" uid="uid://ubg2p1rj6cmf" path="res://scenes/tile_map.tscn" id="1_cbm23"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_uyabw"]
 [ext_resource type="PackedScene" uid="uid://b6fyqb5urbmtb" path="res://scenes/game/platform.tscn" id="3_mj0wa"]
-[ext_resource type="PackedScene" uid="uid://b1dsswtgxokej" path="res://scenes/enemy/fly/fly.tscn" id="4_ri5t1"]
 
 [node name="TestRoom3" type="Node2D"]
 
@@ -29,6 +28,3 @@ position = Vector2(1009, 406)
 
 [node name="Platform7" parent="." instance=ExtResource("3_mj0wa")]
 position = Vector2(1012, 352)
-
-[node name="Fly" parent="." instance=ExtResource("4_ri5t1")]
-position = Vector2(254, 228)
