@@ -29,6 +29,9 @@ func on_area_entered(otherArea: Area2D):
 	if hitboxComponent.isEnemy and myHitboxComponent.isEnemy:
 		return
 	
+	if healthComponent.dead:
+		return
+	
 	healthComponent.damage(hitboxComponent.damage)
 	hitboxComponent.start_attack_cooldown()
 	damage_flash()

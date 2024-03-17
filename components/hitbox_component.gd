@@ -13,7 +13,8 @@ func start_attack_cooldown():
 
 func disable_collider():
 	collisionShape.disabled = true
-	get_tree().create_timer(cooldown).timeout.connect(reset_collider)
+	if get_tree():
+		get_tree().create_timer(cooldown).timeout.connect(reset_collider)
 
 func reset_collider():
 	collisionShape.disabled = false

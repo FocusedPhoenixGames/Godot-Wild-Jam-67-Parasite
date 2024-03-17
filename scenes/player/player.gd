@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 enum Ability { WALL_JUMP, CLIMBING, DASH }
-enum State { NORMAL, JUMPING, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE }
+enum State { NORMAL, JUMPING, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE, DEAD }
 
 #region Variables
 @export var speed: float = 140.0 * 60 # Physic Updates
@@ -40,6 +40,8 @@ enum State { NORMAL, JUMPING, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE }
 @onready var hurtboxComponent: HurtboxComponent = $HurtboxComponent
 @onready var parasiteComponent: ParasiteComponent = $ParasiteComponent
 @onready var animation: AnimationPlayer = $AnimationPlayer
+@onready var deathText: RichTextLabel = $DeathText
+@onready var deathTextBg: Sprite2D = $DeathTextBg
 
 var jumpBuffered: bool = false
 var jumpStartTime: float = 0.0
@@ -81,6 +83,7 @@ func _ready():
 	healthComponent.health_changed.connect(on_health_changed)
 	attackTimer.timeout.connect(reset_attack)
 	parasiteComponent.abilities_changed.connect(update_abilities)
+	healthComponent.died.connect(on_death)
 
 func _physics_process(delta):
 	state = get_updated_state()
@@ -91,6 +94,8 @@ func _physics_process(delta):
 			normal_state(delta)
 		State.CLIMBING:
 			climbing_state(delta)
+		State.DEAD:
+			handle_skip_death_scene()
 
 #region States and Abilities
 func is_near_wall() -> bool:
@@ -106,6 +111,11 @@ func is_near_wall() -> bool:
 	return false
 
 func get_updated_state():
+	if healthComponent.dead:
+		state == State.DEAD
+	if state == State.DEAD:
+		return state
+	
 	isOnWall = is_near_wall()
 	
 	if state == State.WALL_JUMPING || state == State.WALL_JUMP_DECLINE:
@@ -435,3 +445,22 @@ func play_animation(animName: String):
 		animPlayer = enemyPlayer
 	
 	animPlayer.play(animName)
+
+func on_death():
+	parasiteComponent.reset()
+	state = State.DEAD
+	animation.play("die")
+	
+	var camera: Camera2D = get_node("Camera2D")
+	var tween = get_tree().create_tween()
+	tween.tween_property(camera, "zoom", Vector2(2,2), 2.4)
+	tween.tween_callback(death_message)
+	
+	var tween2 = get_tree().create_tween()
+	tween2.tween_property(deathText, "modulate:a", 1.0, 1.0)
+	var tween3 = get_tree().create_tween()
+	tween3.tween_property(deathTextBg, "modulate:a", 0.8, 1.0)
+
+func death_message():
+	await get_tree().create_timer(2.0).timeout
+	get_tree().change_scene_to_file("res://scenes/menus/title_screen.tscn")

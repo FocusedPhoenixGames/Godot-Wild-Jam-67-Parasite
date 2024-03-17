@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bd0wkxiatophh"]
+[gd_scene load_steps=22 format=3 uid="uid://bd0wkxiatophh"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_222uv"]
 [ext_resource type="PackedScene" uid="uid://cb5o5n2xsmvkh" path="res://components/health_component.tscn" id="4_0mhdc"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://ddy3n2drispss" path="res://scenes/player/parasite_component.tscn" id="7_psfo0"]
 [ext_resource type="Texture2D" uid="uid://c4ecekdo4yf8v" path="res://assets/misc/light.png" id="8_lpely"]
 [ext_resource type="Texture2D" uid="uid://ciyxqcedcscpx" path="res://assets/misc/small_light.png" id="9_ihq0t"]
-[ext_resource type="Texture2D" uid="uid://clqymr4xdm6br" path="res://scenes/player/death_background.png" id="9_ncre7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m26t1"]
 size = Vector2(8, 3)
@@ -44,22 +43,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2i(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_b3ver"]
-resource_name = "die"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(5, 6)]
 }
 
 [sub_resource type="Animation" id="Animation_uoscl"]
@@ -113,6 +96,22 @@ tracks/0/keys = {
 "values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2)]
 }
 
+[sub_resource type="Animation" id="Animation_b3ver"]
+resource_name = "die"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(5, 6)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4jd5l"]
 _data = {
 "RESET": SubResource("Animation_adq1q"),
@@ -125,15 +124,6 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 10
 script = ExtResource("1_222uv")
-speed = null
-climbSpeed = null
-jumpVelocity = null
-jumpBufferTime = null
-wallJumpCooldown = null
-attackCooldown = null
-fallMultiplier = null
-lowJumpMultiplier = null
-wallJumpsPushAway = null
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_0mhdc")]
 maxHealth = 2
@@ -325,41 +315,5 @@ libraries = {
 "": SubResource("AnimationLibrary_4jd5l")
 }
 
-[node name="DeathText2" type="TextEdit" parent="."]
-visible = false
-offset_left = -96.0
-offset_top = -38.0
-offset_right = 106.0
-offset_bottom = 32.0
-theme_override_colors/font_readonly_color = Color(0.243137, 0.243137, 0.243137, 1)
-theme_override_font_sizes/font_size = 41
-text = "YOU DIED"
-editable = false
-context_menu_enabled = false
-shortcut_keys_enabled = false
-selecting_enabled = false
-deselect_on_focus_loss_enabled = false
-drag_and_drop_selection_enabled = false
-virtual_keyboard_enabled = false
-middle_mouse_paste_enabled = false
-
-[node name="DeathTextBg" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0)
-light_mask = 0
-z_index = -1
-position = Vector2(2.79891, -2.39806)
-scale = Vector2(1.95726, 1.85012)
-texture = ExtResource("9_ncre7")
-
-[node name="DeathText" type="RichTextLabel" parent="."]
-modulate = Color(1, 1, 1, 0)
-offset_left = -92.2011
-offset_top = -31.3981
-offset_right = 121.799
-offset_bottom = 34.6019
-scale = Vector2(0.989518, 0.989518)
-theme_override_font_sizes/normal_font_size = 41
-text = "YOU DIED"
-
-[connection signal="body_entered" from="Hitbox" to="." method="_on_spike_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_spike_entered"]
