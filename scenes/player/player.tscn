@@ -325,6 +325,7 @@ offset_left = 317.0
 offset_top = 238.0
 offset_right = 474.0
 offset_bottom = 264.0
+mouse_filter = 2
 text = "Press 'Shift' to dash"
 
 [node name="HealthbarSprite" type="Sprite2D" parent="CanvasLayer"]
@@ -357,8 +358,9 @@ offset_top = -31.3981
 offset_right = 121.799
 offset_bottom = 34.6019
 scale = Vector2(0.989518, 0.989518)
+mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 41
 text = "YOU DIED"
 
-[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_spike_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

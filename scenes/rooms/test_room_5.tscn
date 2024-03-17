@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6l1qiy68b0me"]
+[gd_scene load_steps=6 format=3 uid="uid://c6l1qiy68b0me"]
 
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_lja1a"]
 [ext_resource type="PackedScene" uid="uid://ubg2p1rj6cmf" path="res://scenes/tile_map.tscn" id="2_vfx1a"]
 [ext_resource type="PackedScene" uid="uid://ctjv8juuowmws" path="res://scenes/game/save_point.tscn" id="3_1aqnx"]
+[ext_resource type="PackedScene" uid="uid://baqlln1nkdk7x" path="res://scenes/rooms/util/Lever.tscn" id="4_rwyyf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6gw2j"]
+size = Vector2(20, 63)
 
 [node name="TestRoom5" type="Node2D"]
 
@@ -13,3 +17,16 @@ layer_0/tile_data = PackedInt32Array(852004, 327680, 3, 917540, 327680, 4, 98307
 
 [node name="SavePoint" parent="." instance=ExtResource("3_1aqnx")]
 position = Vector2(993, 546)
+
+[node name="Lever" parent="." instance=ExtResource("4_rwyyf")]
+position = Vector2(264, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lever/Doors" index="0"]
+position = Vector2(17, 255.5)
+shape = SubResource("RectangleShape2D_6gw2j")
+
+[node name="LeverLogic" parent="Lever" index="1" node_paths=PackedStringArray("tilemap")]
+tile = 25
+tilemap = NodePath("../../TileMap")
+
+[editable path="Lever"]

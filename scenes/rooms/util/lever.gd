@@ -41,7 +41,7 @@ func on_exit_hover():
 	hovered = false
 	sprite.visible = false
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	hasPlayer = get_overlapping_bodies().has(player)
 	if hovered and hasPlayer:
 		sprite.visible = true
