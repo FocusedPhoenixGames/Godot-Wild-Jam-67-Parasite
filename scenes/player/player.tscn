@@ -360,5 +360,5 @@ scale = Vector2(0.989518, 0.989518)
 theme_override_font_sizes/normal_font_size = 41
 text = "YOU DIED"
 
-[connection signal="body_entered" from="Hitbox" to="." method="_on_spike_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_spike_entered"]
