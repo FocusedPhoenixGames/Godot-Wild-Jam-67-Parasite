@@ -1,15 +1,16 @@
-[gd_scene load_steps=21 format=3 uid="uid://dltvcpearooxb"]
+[gd_scene load_steps=22 format=3 uid="uid://dltvcpearooxb"]
 
 [ext_resource type="Script" path="res://scenes/enemy/cheetah.gd" id="1_p13us"]
 [ext_resource type="PackedScene" uid="uid://cb5o5n2xsmvkh" path="res://components/health_component.tscn" id="2_ejspf"]
 [ext_resource type="PackedScene" uid="uid://dqe7p8u5luxl1" path="res://components/hitbox_component.tscn" id="3_dvs4f"]
 [ext_resource type="PackedScene" uid="uid://vp0aej2eo7yy" path="res://components/hurtbox_component.tscn" id="4_gjkch"]
-[ext_resource type="Texture2D" uid="uid://dc65q723l8iaj" path="res://scenes/enemy/dog/dog_sprite_shee.png" id="5_ivp4q"]
+[ext_resource type="Texture2D" uid="uid://c5fg6lpvias2p" path="res://scenes/enemy/dog/dog_spritesheet.png" id="5_j065j"]
 [ext_resource type="Script" path="res://scripts/StateMachine/FiniteStateMachine.gd" id="6_3nabv"]
 [ext_resource type="Script" path="res://scripts/StateMachine/Idle.gd" id="7_0ifdw"]
 [ext_resource type="Script" path="res://scripts/StateMachine/Attack.gd" id="8_ioda0"]
 [ext_resource type="Script" path="res://scripts/StateMachine/Chase.gd" id="9_k5yvk"]
 [ext_resource type="PackedScene" uid="uid://cfjhv4c6b18jf" path="res://components/infectable_component.tscn" id="10_g8pt8"]
+[ext_resource type="Texture2D" uid="uid://dy3mmka1y1852" path="res://scenes/enemy/dog/dog_infected_spritesheet.png" id="11_i7v4n"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cogbr"]
 radius = 18.0
@@ -144,7 +145,7 @@ shape = SubResource("CapsuleShape2D_lgpx0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(5, 0)
-texture = ExtResource("5_ivp4q")
+texture = ExtResource("5_j065j")
 hframes = 7
 vframes = 5
 
@@ -181,4 +182,5 @@ shape = SubResource("RectangleShape2D_thxs5")
 [node name="InfectableComponent" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("10_g8pt8")]
 enemy = NodePath("..")
 spriteOffsetY = -7.0
+infectedTexture = ExtResource("11_i7v4n")
 abilities = Array[int]([0, 1])

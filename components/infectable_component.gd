@@ -6,6 +6,7 @@ const Ability = preload("res://scripts/ability_constants.gd").Ability
 @export var enemy: Node
 @export var healthPercentage: float = 33.4
 @export var spriteOffsetY: float = 0.0
+@export var infectedTexture: Texture2D
 @export var abilities: Array[Ability]
 
 @onready var button: Button = $Button

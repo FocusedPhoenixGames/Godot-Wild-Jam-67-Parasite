@@ -28,7 +28,10 @@ func infect(infectable: InfectableComponent):
 		oldEnemyPlayer.queue_free()
 	
 	var enemySprite = infectable.enemy.get_node("Sprite2D").duplicate() as Sprite2D
-	sprite.texture = enemySprite.texture
+	if infectable.infectedTexture:
+		sprite.texture = infectable.infectedTexture
+	else:
+		sprite.texture = enemySprite.texture
 	sprite.scale = enemySprite.scale
 	sprite.get_rect().size = enemySprite.get_rect().size
 	sprite.hframes = enemySprite.hframes

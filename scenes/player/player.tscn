@@ -301,5 +301,5 @@ libraries = {
 "": SubResource("AnimationLibrary_4jd5l")
 }
 
-[connection signal="body_entered" from="Hitbox" to="." method="_on_spike_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_spike_entered"]

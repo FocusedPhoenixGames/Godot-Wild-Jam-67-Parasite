@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dwse7tfiateik"]
+[gd_scene load_steps=22 format=3 uid="uid://dwse7tfiateik"]
 
 [ext_resource type="PackedScene" uid="uid://cb5o5n2xsmvkh" path="res://components/health_component.tscn" id="1_lbchf"]
 [ext_resource type="Script" path="res://scenes/enemy/cheetah.gd" id="1_ncpgu"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/StateMachine/Attack.gd" id="8_4q8rq"]
 [ext_resource type="Script" path="res://scripts/StateMachine/Chase.gd" id="9_u68ga"]
 [ext_resource type="PackedScene" uid="uid://cfjhv4c6b18jf" path="res://components/infectable_component.tscn" id="10_q463b"]
+[ext_resource type="Texture2D" uid="uid://c4on3hee4mytb" path="res://scenes/enemy/cheetah_infected_spritesheet.png" id="11_4a5sd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cogbr"]
 height = 46.0
@@ -176,4 +177,5 @@ shape = SubResource("RectangleShape2D_thxs5")
 
 [node name="InfectableComponent" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("10_q463b")]
 enemy = NodePath("..")
+infectedTexture = ExtResource("11_4a5sd")
 abilities = Array[int]([2])
