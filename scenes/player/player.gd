@@ -128,6 +128,7 @@ func normal_state(delta):
 	
 	wasOnFloor = isOnFloor
 	wasOnWall = isOnWall
+	handle_drop_through_platform()
 	handle_attack()
 	handle_buffers()
 	handle_jump(delta)
@@ -165,6 +166,11 @@ func extra_gravity(delta):
 		if timeSinceJump < 0.2:
 			var multiplier = (1 - timeSinceJump) * 3 # Longer jump = more gravity
 			velocity.y += gravity * (lowJumpMultiplier * multiplier) * delta
+
+func handle_drop_through_platform():
+	if isOnFloor && Input.is_action_just_pressed("move_down"):
+		global_position.y += 1
+		isOnFloor = false
 
 func handle_buffers():
 	if isOnFloor or (state == State.CLIMBING and isOnWall):
