@@ -16,7 +16,7 @@ func _process(delta):
 	flip_sprite()
 
 func _physics_process(delta):
-	if not is_on_floor():
+	if not is_on_floor() and not flying_enemy:
 		velocity.y += gravity * delta
 	
 	if stateMachine.current_state != chaseState:
