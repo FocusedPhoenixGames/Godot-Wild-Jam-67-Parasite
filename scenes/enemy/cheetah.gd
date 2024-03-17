@@ -32,7 +32,7 @@ func flip_sprite():
 		return
 	
 	else:
-		direction = player.position - position
+		direction = player.global_position - global_position
 		
 		if direction.x < 0:
 			sprite.flip_h = true

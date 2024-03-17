@@ -113,7 +113,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yr38f"]
-size = Vector2(26, 30)
+size = Vector2(22, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_thxs5"]
 size = Vector2(170, 47)
@@ -155,8 +155,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-3, 9)
+position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_yr38f")
 
 [node name="FiniteStateMachine" type="Node2D" parent="."]
@@ -173,9 +172,9 @@ script = ExtResource("9_k5yvk")
 
 [node name="PlayerDetection" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
-visible = false
 position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_thxs5")
 

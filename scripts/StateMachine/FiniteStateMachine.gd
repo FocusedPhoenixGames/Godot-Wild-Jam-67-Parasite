@@ -9,7 +9,10 @@ func _ready():
 	current_state.enter()
 
 func change_state(state):
-	#print("state: ", state)
+	var new_state = find_child(state) as StateMachine
+	if new_state == current_state:
+		return
+	
 	current_state = find_child(state) as StateMachine
 	current_state.enter()
 	
