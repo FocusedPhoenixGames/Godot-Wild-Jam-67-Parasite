@@ -1,5 +1,5 @@
 extends Node2D
-class_name StateMachine
+class_name BossState
 
 @onready var debug = owner.find_child("debug")
 @onready var player = get_tree().root.get_node("Game").get_node("Player")
@@ -15,11 +15,10 @@ func enter():
 func exit():
 	set_physics_process(false)
 
-func transition():
+func transition(delta):
 	pass
 
 func _physics_process(delta):
-	transition()
+	transition(delta)
 	#debug.text = name
-
 

@@ -227,7 +227,7 @@ position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_ubgli")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("6_ch317")]
-visible = false
+isEnemy = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(14, 0)

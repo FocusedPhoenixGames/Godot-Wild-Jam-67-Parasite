@@ -1,8 +1,6 @@
-[gd_scene load_steps=28 format=3 uid="uid://38mqxfqx24iw"]
+[gd_scene load_steps=20 format=3 uid="uid://38mqxfqx24iw"]
 
-[ext_resource type="Script" path="res://scenes/enemy/boss/boss.gd" id="1_oarrk"]
 [ext_resource type="PackedScene" uid="uid://cb5o5n2xsmvkh" path="res://components/health_component.tscn" id="1_vtfhu"]
-[ext_resource type="PackedScene" uid="uid://bj65d2ejr6ucx" path="res://scenes/enemy/boss/boss_projectile.tscn" id="2_8d1ux"]
 [ext_resource type="PackedScene" uid="uid://dqe7p8u5luxl1" path="res://components/hitbox_component.tscn" id="2_imtks"]
 [ext_resource type="PackedScene" uid="uid://vp0aej2eo7yy" path="res://components/hurtbox_component.tscn" id="3_u3cpc"]
 [ext_resource type="Texture2D" uid="uid://cjf76ds8j6jk" path="res://scenes/enemy/boss/boss_spritesheet_2.png" id="4_xlbl4"]
@@ -10,9 +8,7 @@
 [ext_resource type="Script" path="res://scenes/enemy/boss/states/boss_idle.gd" id="6_2is72"]
 [ext_resource type="Script" path="res://scenes/enemy/boss/states/boss_sleep.gd" id="6_jl61b"]
 [ext_resource type="Script" path="res://scenes/enemy/boss/states/boss_wakeup.gd" id="7_aow5u"]
-[ext_resource type="Script" path="res://scenes/enemy/boss/states/boss_attack.gd" id="7_bsgxi"]
-[ext_resource type="Script" path="res://scenes/enemy/boss/states/boss_near_attack.gd" id="10_rbla3"]
-[ext_resource type="Script" path="res://scenes/enemy/boss/states/boss_ranged_attack.gd" id="11_fb2qq"]
+[ext_resource type="Script" path="res://scenes/enemy/boss/boss_attack.gd" id="7_wq0o3"]
 
 [sub_resource type="Animation" id="Animation_jxjb4"]
 length = 0.001
@@ -142,35 +138,24 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ib2rf"]
 radius = 50.0
-height = 276.922
+height = 330.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oysdx"]
 size = Vector2(1619, 698)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5wynn"]
-radius = 53.8459
-height = 319.229
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sbtwn"]
-radius = 55.769
-height = 246.153
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d8afe"]
-radius = 61.5382
-height = 334.614
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_clt7j"]
-radius = 63.4613
-height = 261.537
 
 [node name="Boss" type="CharacterBody2D"]
 scale = Vector2(0.520002, 0.520002)
 collision_layer = 10
 collision_mask = 11
-script = ExtResource("1_oarrk")
-projectile = ExtResource("2_8d1ux")
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_vtfhu")]
+
+[node name="HitboxComponent" parent="." instance=ExtResource("2_imtks")]
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent", "myHitboxComponent", "sprite") instance=ExtResource("3_u3cpc")]
+healthComponent = NodePath("../HealthComponent")
+myHitboxComponent = NodePath("../HitboxComponent")
+sprite = NodePath("../Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("4_xlbl4")
@@ -198,14 +183,13 @@ scale = Vector2(0.431027, 0.501747)
 shape = SubResource("RectangleShape2D_oysdx")
 
 [node name="FiniteStateMachine" type="Node2D" parent="."]
-visible = false
 script = ExtResource("5_r7f4b")
 
 [node name="Idle" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("6_2is72")
 
 [node name="Attack" type="Node2D" parent="FiniteStateMachine"]
-script = ExtResource("7_bsgxi")
+script = ExtResource("7_wq0o3")
 
 [node name="Sleep" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource("6_jl61b")
@@ -214,43 +198,5 @@ script = ExtResource("6_jl61b")
 script = ExtResource("7_aow5u")
 
 [node name="NearAttack" type="Node2D" parent="FiniteStateMachine"]
-script = ExtResource("10_rbla3")
 
 [node name="RangedAttack" type="Node2D" parent="FiniteStateMachine"]
-script = ExtResource("11_fb2qq")
-
-[node name="HitboxComponent2" parent="." instance=ExtResource("2_imtks")]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent2"]
-position = Vector2(-1.06692e-11, 105.769)
-rotation = 1.57079
-shape = SubResource("CapsuleShape2D_5wynn")
-
-[node name="HitboxComponent3" parent="." instance=ExtResource("2_imtks")]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent3"]
-position = Vector2(-6.2962e-13, 19.2307)
-rotation = 1.57079
-shape = SubResource("CapsuleShape2D_sbtwn")
-
-[node name="HurtboxComponent2" parent="." node_paths=PackedStringArray("healthComponent", "myHitboxComponent", "sprite") instance=ExtResource("3_u3cpc")]
-healthComponent = NodePath("../HealthComponent")
-myHitboxComponent = NodePath("../HitboxComponent3")
-sprite = NodePath("../Sprite2D")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent2"]
-position = Vector2(-2.50111e-11, 105.769)
-rotation = 1.57079
-shape = SubResource("CapsuleShape2D_d8afe")
-
-[node name="HurtboxComponent3" parent="." node_paths=PackedStringArray("healthComponent", "myHitboxComponent", "sprite") instance=ExtResource("3_u3cpc")]
-healthComponent = NodePath("../HealthComponent")
-myHitboxComponent = NodePath("../HitboxComponent3")
-sprite = NodePath("../Sprite2D")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent3"]
-position = Vector2(-1.53912e-12, 19.2307)
-rotation = 1.57079
-shape = SubResource("CapsuleShape2D_clt7j")

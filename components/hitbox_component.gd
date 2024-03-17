@@ -3,6 +3,7 @@ class_name HitboxComponent
 
 @export var damage: int = 1
 @export var cooldown: float = 0.0
+@export var isEnemy: bool = true
 
 @onready var collisionShape: CollisionShape2D = $CollisionShape2D
 

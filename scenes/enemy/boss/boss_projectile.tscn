@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://bj65d2ejr6ucx"]
+
+[ext_resource type="Script" path="res://scenes/enemy/boss/boss_projectile.gd" id="1_101kh"]
+[ext_resource type="Texture2D" uid="uid://bewfh7iob4d4s" path="res://scenes/enemy/boss/boss_projectile.png" id="1_xsse3"]
+[ext_resource type="PackedScene" uid="uid://dqe7p8u5luxl1" path="res://components/hitbox_component.tscn" id="3_wosmo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l04sb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1koj4"]
+radius = 15.0
+
+[node name="BossProjectile" type="RigidBody2D"]
+collision_layer = 10
+collision_mask = 11
+gravity_scale = 0.2
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_101kh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xsse3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+scale = Vector2(1.52, 1.52)
+shape = SubResource("CircleShape2D_l04sb")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_wosmo")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_1koj4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

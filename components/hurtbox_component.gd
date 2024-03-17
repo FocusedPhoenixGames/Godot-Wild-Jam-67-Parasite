@@ -23,7 +23,10 @@ func on_area_entered(otherArea: Area2D):
 		return
 	
 	var hitboxComponent = otherArea as HitboxComponent
-	if hitboxComponent == myHitboxComponent:
+	if hitboxComponent.get_parent() == get_parent():
+		return
+	
+	if hitboxComponent.isEnemy and myHitboxComponent.isEnemy:
 		return
 	
 	healthComponent.damage(hitboxComponent.damage)
@@ -31,8 +34,9 @@ func on_area_entered(otherArea: Area2D):
 	damage_flash()
 
 func damage_flash():
-	if whitenMaterial == null:
-		return
+	#if whitenMaterial == null:
+		#return
+	whitenMaterial = sprite.material #return hacky way to fix issue on boss for rn
 	
 	whitenMaterial.set_shader_parameter("whiten", 0.8)
 	
