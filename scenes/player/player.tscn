@@ -317,31 +317,6 @@ libraries = {
 "": SubResource("AnimationLibrary_4jd5l")
 }
 
-[node name="DeathText" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="DeathTextBg" type="Sprite2D" parent="DeathText"]
-modulate = Color(1, 1, 1, 0)
-light_mask = 0
-z_index = -1
-position = Vector2(2.79891, -2.39806)
-scale = Vector2(1.95726, 1.85012)
-texture = ExtResource("9_ncre7")
-
-[node name="DeathText" type="RichTextLabel" parent="DeathText"]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = -92.2011
-offset_top = -31.3981
-offset_right = 121.799
-offset_bottom = 34.6019
-scale = Vector2(0.989518, 0.989518)
-theme_override_font_sizes/normal_font_size = 41
-text = "YOU DIED"
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="AbilityTooltip" type="RichTextLabel" parent="CanvasLayer"]
@@ -358,6 +333,32 @@ scale = Vector2(1.64, 1.64)
 texture = ExtResource("10_tppri")
 hframes = 10
 script = ExtResource("11_s5hno")
+
+[node name="DeathText" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 241.0
+offset_top = 140.0
+offset_right = 281.0
+offset_bottom = 180.0
+
+[node name="DeathTextBg" type="Sprite2D" parent="CanvasLayer/DeathText"]
+modulate = Color(1, 1, 1, 0)
+light_mask = 0
+position = Vector2(2.79891, -2.39806)
+scale = Vector2(1.95726, 1.85012)
+texture = ExtResource("9_ncre7")
+
+[node name="DeathText" type="RichTextLabel" parent="CanvasLayer/DeathText"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -92.2011
+offset_top = -31.3981
+offset_right = 121.799
+offset_bottom = 34.6019
+scale = Vector2(0.989518, 0.989518)
+theme_override_font_sizes/normal_font_size = 41
+text = "YOU DIED"
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_spike_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

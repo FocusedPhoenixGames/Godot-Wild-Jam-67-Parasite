@@ -40,8 +40,8 @@ enum State { NORMAL, JUMPING, CLIMBING, WALL_JUMPING, WALL_JUMP_DECLINE, DEAD }
 @onready var hurtboxComponent: HurtboxComponent = $HurtboxComponent
 @onready var parasiteComponent: ParasiteComponent = $ParasiteComponent
 @onready var animation: AnimationPlayer = $AnimationPlayer
-@onready var deathText: RichTextLabel = $DeathText/DeathText
-@onready var deathTextBg: Sprite2D = $DeathText/DeathTextBg
+@onready var deathText: RichTextLabel = $CanvasLayer/DeathText/DeathText
+@onready var deathTextBg: Sprite2D = $CanvasLayer/DeathText/DeathTextBg
 @onready var attackAnimScene: PackedScene = preload("res://scenes/player/attack_animation.tscn")
 
 var jumpBuffered: bool = false
